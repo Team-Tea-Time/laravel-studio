@@ -1,0 +1,37 @@
+version: '3.7'
+
+services:
+
+  mysql:
+    image: mysql:5.7
+    container_name: laravel-studio-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=studio
+      - MYSQL_USER=studio
+      - MYSQL_PASSWORD=secret
+    ports:
+      - "3306:3306"
+
+  nginx:
+    image: nginx:alpine
+    container_name: laravel-studio-nginx
+    working_dir: /var/www/laravel-studio
+    volumes:
+      - ./src:/var/www/laravel-studio
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - "8000:80"
+
+  php-fpm:
+    build:
+      context: .
+      dockerfile: docker/php-fpm/Dockerfile
+    container_name: laravel-studio-php-fpm
+    working_dir: /var/www/laravel-studio
+    environment:
+      XDEBUG_CONFIG: remote_enable=1 remote_host=host.docker.internal remote_port=9001
+    volumes:
+      - ./src:/var/www/laravel-studio
+      - /var/www/laravel-studio/vendor
+      - ../laravel-packages:/var/www/packages
