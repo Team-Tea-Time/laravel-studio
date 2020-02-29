@@ -165,7 +165,7 @@ return [
         /*
          * Package Service Providers...
          */
-        Riari\Forum\ForumServiceProvider::class,
+        TeamTeaTime\Forum\ForumServiceProvider::class,
 
         /*
          * Application Service Providers...
