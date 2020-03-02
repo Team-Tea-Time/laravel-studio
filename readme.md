@@ -4,9 +4,11 @@ Just Laravel boilerplate with some alterations to support local package developm
 
 ## Usage
 
-1) Copy `src/.env.example` to `src/.env`
+1) Clone/place your package(s) into a `laravel-packages` directory adjacent to (not inside) this repo
 
-2) Run:
+2) Copy `src/.env.example` to `src/.env`
+
+3) Run:
 ```bash
 docker-compose up
 docker exec laravel-studio-php-fpm composer install
