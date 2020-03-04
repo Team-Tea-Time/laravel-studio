@@ -22,11 +22,16 @@ return [
     |--------------------------------------------------------------------------
     | Pagination
     |--------------------------------------------------------------------------
+    |
+    | "Per page" values for each model. These are applied in both the frontend
+    | and API.
+    |
     */
 
     'pagination' => [
-        'threads' => 20, // Threads per page
-        'posts' => 15  // Posts per page
+        'categories' => 50,
+        'threads' => 20,
+        'posts' => 3
     ],
 
     /*
