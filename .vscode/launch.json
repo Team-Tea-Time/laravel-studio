@@ -9,7 +9,8 @@
             "type": "php",
             "request": "launch",
             "pathMappings": {
-                "/application": "${workspaceRoot}/src"
+                "/var/www/laravel-studio": "${workspaceFolder:laravel-studio}/src",
+                "/var/www/packages/laravel-forum": "${workspaceFolder:laravel-forum}"
             },
             "port": 9001,
             "ignore": [
