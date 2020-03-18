@@ -18,7 +18,7 @@ git clone git@github.com:Team-Tea-Time/laravel-studio.git
 5) Run:
 ```bash
 docker-compose up
-docker exec laravel-studio-php-fpm composer install
-docker exec laravel-studio-php-fpm php artisan key:generate
-docker exec laravel-studio-php-fpm php artisan migrate
+docker-compose exec php-fpm composer install
+docker-compose exec php-fpm php artisan key:generate
+docker-compose exec php-fpm php artisan migrate
 ```
