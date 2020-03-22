@@ -4,6 +4,11 @@ COPY src/composer.* /var/www/laravel-studio/
 
 WORKDIR /var/www/laravel-studio
 
+# Configure timezone to avoid time sync issues
+RUN rm /etc/localtime
+RUN ln -s /usr/share/zoneinfo/Europe/London /etc/localtime
+RUN "date"
+
 # System dependencies
 RUN apt-get update && apt-get install -y \
     build-essential \
