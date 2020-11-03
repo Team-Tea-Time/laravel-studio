@@ -13,7 +13,7 @@ git clone git@github.com:Team-Tea-Time/laravel-studio.git
 
 3) Copy `src/.env.example` to `src/.env`
 
-4) Modify the `autoload` section of `composer.json` to specify your package namespace(s)/path(s)
+4) Modify the `autoload` section of `src/composer.json` to specify your package namespace(s)/path(s)
 
 5) Run `docker-compose up` and any other commands you may need to run in the container for your package(s):
 ```bash
