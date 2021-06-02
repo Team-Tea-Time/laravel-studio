@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/tokens/create/{name?}', function (\Illuminate\Http\Request $request, $name = 'test') {
+    $token = $request->user()->createToken($name);
+
+    return ['token' => $token->plainTextToken];
+});
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
