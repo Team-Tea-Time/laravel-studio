@@ -38,12 +38,8 @@
             "App\\": "app/",
             "TeamTeaTime\\Forum\\": "/var/www/packages/laravel-forum/src/",
             "TeamTeaTime\\Forum\\Database\\Factories\\": "/var/www/packages/laravel-forum/database/factories/",
-            "TeamTeaTime\\Forum\\Database\\Seeds\\": "/var/www/packages/laravel-forum/database/seeds/"
-        },
-        "classmap": [
-            "database/seeds",
-            "database/factories"
-        ]
+            "TeamTeaTime\\Forum\\Database\\Seeders\\": "/var/www/packages/laravel-forum/database/seeders/"
+        }
     },
     "autoload-dev": {
         "psr-4": {
