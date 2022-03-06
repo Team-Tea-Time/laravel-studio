@@ -29,8 +29,6 @@ services:
       dockerfile: docker/php-fpm/Dockerfile
     container_name: laravel-studio-php-fpm
     working_dir: /var/www/laravel-studio
-    environment:
-      XDEBUG_CONFIG: remote_enable=1 remote_host=host.docker.internal remote_port=9001
     volumes:
       - ./src:/var/www/laravel-studio
       - /var/www/laravel-studio/vendor

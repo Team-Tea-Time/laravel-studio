@@ -12,7 +12,7 @@
                 "/var/www/laravel-studio": "${workspaceFolder:laravel-studio}/src",
                 "/var/www/packages/laravel-forum": "${workspaceFolder:laravel-forum}"
             },
-            "port": 9001,
+            "port": 9003,
             "ignore": [
                 "**/vendor/**/*.php"
             ]
