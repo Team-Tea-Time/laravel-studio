@@ -190,6 +190,15 @@
     }
     </style>
 
+    <script type="module">
+    const category = JSON.parse(`{!! json_encode($category) !!}`);
+
+    Echo.private(`Forum.Category.${category.id}`)
+        .listen('.user-created-thread', event => {
+            console.log(event.thread.title);
+        });
+    </script>
+
     <script>
     new Vue({
         el: '.v-category-show',

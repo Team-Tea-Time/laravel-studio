@@ -38,6 +38,9 @@
     <script src="//cdn.jsdelivr.net/npm/sortablejs@1.10.1/Sortable.min.js"></script>
     <!-- Vue.Draggable (https://github.com/SortableJS/Vue.Draggable) -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/Vue.Draggable/2.23.2/vuedraggable.umd.min.js"></script>
+
+    <!-- Scripts -->
+    @vite(['resources/js/app.js'])
 </head>
 <body class="bg-gray-100">
     <nav class="v-navbar bg-white shadow py-4">
