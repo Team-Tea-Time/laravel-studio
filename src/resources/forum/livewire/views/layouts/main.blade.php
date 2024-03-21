@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>{{ $title ?? 'Page Title' }}</title>
+
+        @vite(['resources/forum/livewire/css/forum.css'])
+    </head>
+    <body class="forum bg-slate-200">
+        <div class="bg-white shadow-md border-b border-slate-100">
+            <div class="container mx-auto p-4 flex flex-row">
+                <div class="mr-6 font-bold">
+                    {{ config('app.name') }}
+                </div>
+                <div class="">
+                    <a href="/" class="mx-2">Home</a>
+                    <a href="/forum" class="mx-2">Forum</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto p-4">
+            {{ $slot }}
+        </div>
+    </body>
+</html>

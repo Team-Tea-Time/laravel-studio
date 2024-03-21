@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    .forum {
+        font-family: "Source Sans 3", sans-serif;
+        font-optical-sizing: auto;
+        font-size: 18px;
+        @apply text-slate-900;
+    }
+
+    .breadcrumbs ol li + li {
+        margin-left: .5rem;
+    }
+
+    .breadcrumbs ol li + li::before {
+        float: left;
+        padding-right: .5rem;
+        color: #6c757d;
+        content: "/";
+    }
+
+    h1 {
+        @apply text-4xl my-4;
+    }
+
+    h2 {
+        @apply text-2xl;
+    }
+
+    a {
+        @apply text-slate-600 hover:text-slate-900;
+    }
+}
