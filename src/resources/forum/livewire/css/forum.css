@@ -23,6 +23,10 @@
         content: "/";
     }
 
+    div, p {
+        font-size: 1rem;
+    }
+
     h1 {
         @apply text-4xl my-6;
     }

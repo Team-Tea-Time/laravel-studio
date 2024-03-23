@@ -11,10 +11,10 @@
     <body class="forum bg-slate-200">
         <div class="bg-white shadow-md border-b border-slate-100">
             <div class="container mx-auto p-4 flex flex-row">
-                <div class="mr-6 font-bold">
+                <div class="text-xl mr-6 font-bold">
                     {{ config('app.name') }}
                 </div>
-                <div class="">
+                <div class="text-lg self-center">
                     <a href="/" class="mx-2">Home</a>
                     <a href="/forum" class="mx-2">Forum</a>
                 </div>
