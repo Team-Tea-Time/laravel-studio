@@ -4,7 +4,15 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        <title>{{ $title ?? 'Page Title' }}</title>
+        <title>
+            @if (isset($threadTitle))
+                {{ $threadTitle }} —
+            @endif
+            @if (isset($category))
+                {{ $category->title }} —
+            @endif
+            {{ trans('forum::general.home_title') }}
+        </title>
 
         @vite(['resources/forum/livewire/css/forum.css'])
     </head>

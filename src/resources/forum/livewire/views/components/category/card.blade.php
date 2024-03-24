@@ -11,14 +11,12 @@
         </div>
         <div class="flex-1 text-center text-base">
             @if ($category->accepts_threads)
-                <div class="inline-block bg-zinc-300 text-zinc-600 rounded-full px-2 m-2">
-                    @include ('forum::components.icons.chat-bubbles-mini')
-                    {{ trans_choice('forum::threads.thread', 2) }}: {{ $category->thread_count }}
-                </div>
-                <div class="inline-block bg-zinc-300 text-zinc-600 rounded-full px-2 m-2">
-                    @include ('forum::components.icons.chat-bubble-text-mini')
-                    {{ trans_choice('forum::posts.post', 2) }}: {{ $category->post_count }}
-                </div>
+                <livewire:forum::components.pill
+                    icon="chat-bubbles-mini"
+                    :text="trans_choice('forum::threads.thread', 2) . ': ' . $category->thread_count" />
+                <livewire:forum::components.pill
+                    icon="chat-bubble-text-mini"
+                    :text="trans_choice('forum::posts.post', 2) . ': ' . $category->post_count" />
             @endif
         </div>
         <div class="flex-1 text-right">
@@ -46,7 +44,6 @@
                     @include ('forum::components.icons.subcategory')
                 </div>
                 <div class="grow flex items-center justify-items-center bg-white shadow-md rounded-lg p-4">
-
                     <div class="flex-1">
                         <h3>
                             <a href="{{ $subcategory->route }}" style="color: {{ $subcategory->color }}">{{ $subcategory->title }}</a>
@@ -55,14 +52,12 @@
                     </div>
                     <div class="flex-1 text-center text-base">
                         @if ($subcategory->accepts_threads)
-                            <div class="inline-block bg-zinc-300 text-zinc-600 rounded-full px-2 m-2">
-                                @include ('forum::components.icons.chat-bubbles-mini')
-                                {{ trans_choice('forum::threads.thread', 2) }}: {{ $subcategory->thread_count }}
-                            </div>
-                            <div class="inline-block bg-zinc-300 text-zinc-600 rounded-full px-2 m-2">
-                                @include ('forum::components.icons.chat-bubble-text-mini')
-                                {{ trans_choice('forum::posts.post', 2) }}: {{ $subcategory->post_count }}
-                            </div>
+                            <livewire:forum::components.pill
+                                icon="chat-bubbles-mini"
+                                :text="trans_choice('forum::threads.thread', 2) . ': ' . $subcategory->thread_count" />
+                            <livewire:forum::components.pill
+                                icon="chat-bubble-text-mini"
+                                :text="trans_choice('forum::posts.post', 2) . ': ' . $subcategory->post_count" />
                         @endif
                     </div>
                     <div class="flex-1 text-right">
