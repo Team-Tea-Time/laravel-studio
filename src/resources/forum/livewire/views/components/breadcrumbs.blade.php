@@ -8,13 +8,13 @@
                 {{ trans('forum::general.index') }}
             </a>
         </li>
-        @if (isset($category) && $category)
-            @include ('forum::components.breadcrumb-categories', ['category' => $category])
+        @if (isset($category) && $category || isset($thread->category) && $thread->category)
+            @include ('forum::components.breadcrumb-categories', ['category' => $category ?? $thread->category])
         @endif
         @if (isset($thread) && $thread)
-            <li><a href="{{ Forum::route('thread.show', $thread) }}">{{ $thread->title }}</a></li>
+            <li>{{ trans_choice('forum::threads.thread', 1) }}</li>
         @endif
-        @if (isset($breadcrumbs_append) && count($breadcrumbs_append) > 0)
+        @if (isset($breadcrumbs_append))
             @foreach ($breadcrumbs_append as $breadcrumb)
                 <li>{{ $breadcrumb }}</li>
             @endforeach

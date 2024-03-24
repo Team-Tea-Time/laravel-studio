@@ -21,16 +21,16 @@
         </div>
         <div class="flex-1 text-right">
             @if ($category->accepts_threads)
-                @if ($category->newest_thread)
+                @if ($category->newestThread)
                     <div>
-                        <a href="{{ Forum::route('thread.show', $category->newest_thread) }}">{{ $category->newest_thread->title }}</a>
-                        @include ('forum::components.timestamp', ['carbon' => $category->newest_thread->created_at])
+                        <a href="{{ $category->newestThread->route }}">{{ $category->newestThread->title }}</a>
+                        @include ('forum::components.timestamp', ['carbon' => $category->newestThread->created_at])
                     </div>
                 @endif
-                @if ($category->latest_active_thread && $category->latest_active_thread->reply_count > 1)
+                @if ($category->latestActiveThread && $category->latestActiveThread->reply_count > 1)
                     <div>
-                        <a href="{{ Forum::route('thread.show', $category->latest_active_thread->last_post) }}">Re: {{ $category->latest_active_thread->title }}</a>
-                        @include ('forum::components.timestamp', ['carbon' => $category->latest_active_thread->last_post->created_at])
+                        <a href="{{ $category->latestActiveThread->lastPost->route }}">Re: {{ $category->latestActiveThread->title }}</a>
+                        @include ('forum::components.timestamp', ['carbon' => $category->latestActiveThread->lastPost->created_at])
                     </div>
                 @endif
             @endif

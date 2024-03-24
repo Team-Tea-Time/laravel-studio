@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <title>
-            @if (isset($threadTitle))
-                {{ $threadTitle }} —
+            @if (isset($thread))
+                {{ $thread->title }} —
             @endif
             @if (isset($category))
                 {{ $category->title }} —
