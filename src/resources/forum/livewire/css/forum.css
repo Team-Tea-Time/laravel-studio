@@ -12,6 +12,10 @@
         @apply text-slate-900;
     }
 
+    .breadcrumbs ol li {
+        display: inline-block;
+    }
+
     .breadcrumbs ol li + li {
         margin-left: .5rem;
     }

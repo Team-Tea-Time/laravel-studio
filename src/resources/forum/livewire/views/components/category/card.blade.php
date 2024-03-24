@@ -41,7 +41,7 @@
         @foreach ($category->children as $subcategory)
             <div class="flex mt-4">
                 <div class="min-w-24 self-center text-center text-slate-300">
-                    @include ('forum::components.icons.subcategory')
+                    @include ('forum::components.icons.subcategory', ['size' => '12'])
                 </div>
                 <div class="grow flex items-center justify-items-center bg-white shadow-md rounded-lg p-4">
                     <div class="flex-1">

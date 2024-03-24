@@ -34,7 +34,9 @@
                         icon="trash-mini"
                         :text="trans('forum::general.deleted')" />
                 @endif
-                {{ $thread->title }}
+                <span class="inline-block align-middle">
+                    {{ $thread->title }}
+                </span>
             </a>
             {{ $thread->author->name }}
             <span class="text-slate-500">
@@ -46,13 +48,11 @@
                 icon="chat-bubble-text-mini"
                 :text="trans('forum::general.replies') . ': ' . $thread->reply_count" />
         </div>
-        @if ($thread->lastPost)
-            <div class="grow text-right">
-                <a href="{{ Forum::route('thread.show', $thread->lastPost) }}" class="font-medium">{{ trans('forum::posts.view') }} @include ("forum::components.icons.arrow-right-mini")</a>
-                <br>
-                {{ $thread->lastPost->authorName }}
-                <span class="text-slate-500">@include ('forum::components.timestamp', ['carbon' => $thread->lastPost->created_at])</span>
-            </div>
-        @endif
+        <div class="grow text-right">
+            <a href="{{ Forum::route('thread.show', $thread->lastPost) }}" class="text-lg font-medium">{{ trans('forum::posts.view') }} @include ("forum::components.icons.arrow-right-mini")</a>
+            <br>
+            {{ $thread->lastPost->authorName }}
+            <span class="text-slate-500">@include ('forum::components.timestamp', ['carbon' => $thread->lastPost->created_at])</span>
+        </div>
     </div>
 </div>

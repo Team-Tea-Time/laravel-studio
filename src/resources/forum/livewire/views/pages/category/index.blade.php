@@ -1,5 +1,6 @@
 <div>
-    @include('forum::components.breadcrumbs')
+    @include ('forum::components.breadcrumbs')
+    @include ('forum::components.alerts')
 
     <h1>Index</h1>
 

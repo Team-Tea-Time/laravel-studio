@@ -1,13 +1,29 @@
 <div>
-    @include('forum::components.breadcrumbs')
+    @include ('forum::components.breadcrumbs')
+    @include ('forum::components.alerts')
 
-    <h1>{{ trans('forum::threads.new_thread') }} ({{ $category->title }})</h1>
+    <div class="flex justify-center items-center">
+        <div class="grow max-w-screen-lg">
+            <h1>{{ trans('forum::threads.new_thread') }} ({{ $category->title }})</h1>
 
-    <form wire:submit="save">
-        <input type="text" wire:model="title">
+            <div class="bg-white rounded-md shadow-md my-2 p-6">
+                <form wire:submit="save">
+                    @include ('forum::components.form.input-text', ['model' => 'title', 'label' => trans('forum::general.title')])
+                    @include ('forum::components.form.textarea', ['model' => 'content'])
 
-        <input type="text" wire:model="content">
-
-        <button type="submit">Save</button>
-    </form>
+                    <div class="flex mt-6">
+                        <div class="grow">
+                            <livewire:forum::components.button
+                                href="{{ URL::previous() }}"
+                                type="secondary"
+                                label="{{ trans('forum::general.cancel') }}" />
+                        </div>
+                        <div class="grow text-right">
+                            @include ('forum::components.form.button', ['label' => trans('forum::general.create')])
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

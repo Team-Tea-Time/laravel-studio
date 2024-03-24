@@ -2,7 +2,9 @@
     <ol class="flex">
         <li>
             <a href="{{ url(config('forum.frontend.router.prefix')) }}" class="flex items-center">
-                @include ('forum::components.icons.home-mini')
+                <span class="inline-block mr-1">
+                    @include ('forum::components.icons.home-mini')
+                </span>
                 {{ trans('forum::general.index') }}
             </a>
         </li>

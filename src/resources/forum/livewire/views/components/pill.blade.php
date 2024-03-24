@@ -1,6 +1,7 @@
 <span class="inline-block
     rounded-full
     text-base
+    align-middle
     {{ $bgColor ?? 'bg-zinc-300' }}
     {{ $textColor ?? 'text-zinc-600' }}
     {{ $padding ?? 'px-2' }}
