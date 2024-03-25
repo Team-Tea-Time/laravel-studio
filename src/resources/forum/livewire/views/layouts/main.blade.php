@@ -32,5 +32,7 @@
         <div class="container mx-auto p-4">
             {{ $slot }}
         </div>
+
+        <livewire:forum::components.live-alerts />
     </body>
 </html>

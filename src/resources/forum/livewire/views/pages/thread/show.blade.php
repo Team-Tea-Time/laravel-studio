@@ -35,7 +35,7 @@
 
     <div>
         @foreach ($posts as $post)
-            <livewire:forum::components.post.card :post="$post" />
+            <livewire:forum::components.post.card :$post :key="$post->id" />
         @endforeach
     </div>
 

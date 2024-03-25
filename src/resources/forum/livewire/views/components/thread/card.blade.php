@@ -1,5 +1,5 @@
-<div class="my-4">
-    <div class="bg-white shadow-md rounded-lg p-4 flex items-center justify-items-center {{ $thread->trashed() ? 'opacity-75' : '' }}">
+<div class="thread-card my-4" x-data="thread" data-thread="{{ $thread->id }}" {{ $selectable ? 'x-on:change=onThreadChanged' : '' }}>
+    <div class="bg-white border transition ease-in-out shadow-md rounded-lg p-4 flex items-center justify-items-center {{ $thread->trashed() ? 'opacity-75' : '' }}" :class="classes">
         <div class="grow max-w-xl">
             <a href="{{ $thread->route }}" class="block text-xl mb-2" style="color: {{ $thread->category->color }}">
                 @if ($thread->pinned)
@@ -54,5 +54,35 @@
             {{ $thread->lastPost->authorName }}
             <span class="text-slate-500">@include ('forum::components.timestamp', ['carbon' => $thread->lastPost->created_at])</span>
         </div>
+        @if ($selectable)
+            <div class="pl-4">
+                @include ('forum::components.form.input-checkbox', [
+                    'id' => '',
+                    'value' => $thread->id,
+                    'attributes' => '@change=onChanged'
+                ])
+            </div>
+        @endif
     </div>
 </div>
+
+@script
+<script>
+Alpine.data('thread', () => {
+    return {
+        classes: 'border-white',
+        onChanged(event) {
+            event.stopPropagation();
+
+            if (event.target.checked) {
+                this.classes = 'border-slate-500';
+            } else {
+                this.classes = 'border-white';
+            }
+
+            $dispatch('change', { isSelected: event.target.checked, id: event.target.value });
+        }
+    }
+})
+</script>
+@endscript

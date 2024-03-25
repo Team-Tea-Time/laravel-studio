@@ -1,4 +1,4 @@
-<div>
+<div x-data="category" x-on:page-changed="onPageChanged">
     @include ('forum::components.breadcrumbs')
     @include ('forum::components.alerts')
 
@@ -22,11 +22,79 @@
         @endif
     </div>
 
+    <div class="flex justify-end">
+        @include ('forum::components.form.input-checkbox', [
+            'id' => 'toggle-all',
+            'value' => '',
+            'label' => trans('forum::threads.select_all'),
+            'attributes' => 'x-model=toggledAll @click=toggleAll'
+        ])
+    </div>
+
     <div class="my-4">
         @foreach ($threads as $thread)
-            <livewire:forum::components.thread.card :thread="$thread" />
+            <livewire:forum::components.thread.card
+                :$thread
+                :key="$thread->id . $updateKey"
+                :selectable="in_array($thread->id, $selectableThreadIds)" />
         @endforeach
+    </div>
+
+    <div x-show="selectedThreads.length > 0" class="fixed bottom-0 right-0 z-50 bg-white shadow-md rounded-md m-4 p-6">
+        <p class="font-medium">{{ trans('forum::general.with_selection') }}</p>
+
+        @include ('forum::components.form.button', [
+            'label' => 'Lock threads',
+            'attributes' => '@click=lockThreads'
+        ])
+        @include ('forum::components.form.button', [
+            'label' => 'Unlock threads',
+            'attributes' => '@click=unlockThreads'
+        ])
     </div>
 
     {{ $threads->links('forum::components.pagination') }}
 </div>
+
+@script
+<script>
+    Alpine.data('category', () => {
+        return {
+            toggledAll: false,
+            selectedThreads: [],
+            reset() {
+                this.toggledAll = false;
+                this.selectedThreads = [];
+            },
+            onThreadChanged(event) {
+                if (event.detail.isSelected) {
+                    this.selectedThreads.push(event.detail.id);
+                } else {
+                    this.selectedThreads.splice(this.selectedThreads.indexOf(event.detail.id), 1);
+                }
+            },
+            onPageChanged(event) {
+                this.reset();
+            },
+            async lockThreads(event) {
+                const result = await $wire.lockThreads(this.selectedThreads);
+                this.reset();
+                $dispatch('alert', result);
+            },
+            async unlockThreads(event) {
+                const result = await $wire.unlockThreads(this.selectedThreads);
+                this.reset();
+                $dispatch('alert', result);
+            },
+            toggleAll(event) {
+                this.toggledAll = !this.toggledAll;
+                const checkboxes = document.querySelectorAll('[data-thread] input[type=checkbox]');
+                checkboxes.forEach(checkbox => {
+                    checkbox.checked = this.toggledAll;
+                    checkbox.dispatchEvent(new Event('change'));
+                });
+            }
+        }
+    })
+</script>
+@endscript
