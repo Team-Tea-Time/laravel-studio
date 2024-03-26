@@ -1,6 +1,5 @@
 <div>
     @include ('forum::components.breadcrumbs')
-    @include ('forum::components.alerts')
 
     <div class="flex justify-center items-center">
         <div class="grow max-w-screen-lg">

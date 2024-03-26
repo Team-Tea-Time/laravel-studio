@@ -1,5 +1,5 @@
-<div class="my-4">
-    <div class="bg-white shadow-md rounded-lg flex items-stretch">
+<div id="post-{{ $post->sequence }}" class="post-card my-4" x-data="postCard" data-post="{{ $post->id }}" {{ $selectable ? 'x-on:change=onPostChanged' : '' }}>
+    <div class="bg-white outline shadow-md rounded-lg flex items-stretch" {{ $post->trashed() ? 'opacity-75' : '' }}" :class="classes">
         <div class="flex flex-col min-w-48 p-6 border-r border-slate-200">
             <div class="grow text-lg font-medium">
                 {{ $post->authorName }}
@@ -11,11 +11,15 @@
             </div>
         </div>
         <div class="grow p-6">
-            @if ((!isset($single) || !$single) && $post->sequence != 1)
+            @if ($selectable)
                 @can ('deletePosts', $post->thread)
                     @can ('delete', $post)
                         <div class="float-right">
-                            <input type="checkbox" name="posts[]" :value="{{ $post->id }}" />
+                            @include ('forum::components.form.input-checkbox', [
+                                'id' => '',
+                                'value' => $post->id,
+                                'attributes' => '@change=onChanged'
+                            ])
                         </div>
                     @endcan
                 @endcan
@@ -39,3 +43,25 @@
         </div>
     </div>
 </div>
+
+
+@script
+<script>
+Alpine.data('postCard', () => {
+    return {
+        classes: 'outline-none',
+        onChanged(event) {
+            event.stopPropagation();
+
+            if (event.target.checked) {
+                this.classes = 'outline outline-blue-500';
+            } else {
+                this.classes = 'outline-none';
+            }
+
+            $dispatch('change', { isSelected: event.target.checked, id: event.target.value });
+        }
+    }
+})
+</script>
+@endscript

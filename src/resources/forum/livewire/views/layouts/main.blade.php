@@ -33,6 +33,6 @@
             {{ $slot }}
         </div>
 
-        <livewire:forum::components.live-alerts />
+        <livewire:forum::components.alerts />
     </body>
 </html>

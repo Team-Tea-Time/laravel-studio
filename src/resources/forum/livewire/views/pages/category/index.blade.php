@@ -1,6 +1,5 @@
 <div>
     @include ('forum::components.breadcrumbs')
-    @include ('forum::components.alerts')
 
     <h1>{{ trans('forum::general.index') }}</h1>
 

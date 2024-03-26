@@ -1,5 +1,5 @@
-<div class="thread-card my-4" x-data="thread" data-thread="{{ $thread->id }}" {{ $selectable ? 'x-on:change=onThreadChanged' : '' }}>
-    <div class="bg-white border transition ease-in-out shadow-md rounded-lg p-4 flex items-center justify-items-center {{ $thread->trashed() ? 'opacity-75' : '' }}" :class="classes">
+<div class="thread-card my-4" x-data="threadCard" data-thread="{{ $thread->id }}" {{ $selectable ? 'x-on:change=onThreadChanged' : '' }}>
+    <div class="bg-white transition ease-in-out shadow-md rounded-lg p-4 flex items-center justify-items-center {{ $thread->trashed() ? 'opacity-75' : '' }}" :class="classes">
         <div class="grow max-w-xl">
             <a href="{{ $thread->route }}" class="block text-xl mb-2" style="color: {{ $thread->category->color }}">
                 @if ($thread->pinned)
@@ -68,16 +68,16 @@
 
 @script
 <script>
-Alpine.data('thread', () => {
+Alpine.data('threadCard', () => {
     return {
-        classes: 'border-white',
+        classes: 'outline-none',
         onChanged(event) {
             event.stopPropagation();
 
             if (event.target.checked) {
-                this.classes = 'border-slate-500';
+                this.classes = 'outline outline-blue-500';
             } else {
-                this.classes = 'border-white';
+                this.classes = 'outline-none';
             }
 
             $dispatch('change', { isSelected: event.target.checked, id: event.target.value });

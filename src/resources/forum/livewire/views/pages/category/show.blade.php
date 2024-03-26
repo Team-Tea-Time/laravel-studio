@@ -1,6 +1,5 @@
 <div x-data="category" x-on:page-changed="onPageChanged">
     @include ('forum::components.breadcrumbs')
-    @include ('forum::components.alerts')
 
     <h1 class="mb-0" style="color: {{ $category->color }}">{{ $category->title }}</h1>
     <h2 class="mt-0 text-slate-500">{{ $category->description }}</h2>
