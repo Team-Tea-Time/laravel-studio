@@ -51,6 +51,14 @@
             'label' => 'Unlock threads',
             'attributes' => '@click=unlockThreads'
         ])
+        @include ('forum::components.form.button', [
+            'label' => 'Pin threads',
+            'attributes' => '@click=pinThreads'
+        ])
+        @include ('forum::components.form.button', [
+            'label' => 'Unpin threads',
+            'attributes' => '@click=unpinThreads'
+        ])
     </div>
 
     {{ $threads->links('forum::components.pagination') }}
@@ -78,12 +86,22 @@
             },
             async lockThreads(event) {
                 const result = await $wire.lockThreads(this.selectedThreads);
-                this.reset();
+                if (result.type == 'success') this.reset();
                 $dispatch('alert', result);
             },
             async unlockThreads(event) {
                 const result = await $wire.unlockThreads(this.selectedThreads);
-                this.reset();
+                if (result.type == 'success') this.reset();
+                $dispatch('alert', result);
+            },
+            async pinThreads(event) {
+                const result = await $wire.pinThreads(this.selectedThreads);
+                if (result.type == 'success') this.reset();
+                $dispatch('alert', result);
+            },
+            async unpinThreads(event) {
+                const result = await $wire.unpinThreads(this.selectedThreads);
+                if (result.type == 'success') this.reset();
                 $dispatch('alert', result);
             },
             toggleAll(event) {
