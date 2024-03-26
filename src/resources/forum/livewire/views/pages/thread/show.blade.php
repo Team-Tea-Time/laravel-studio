@@ -37,7 +37,7 @@
             <livewire:forum::components.post.card
                 :$post
                 :key="$post->id . $updateKey"
-                :selectable="in_array($post->id, $selectablePostIds)" />
+                :selectable="$post->sequence > 1 && in_array($post->id, $selectablePostIds)" />
         @endforeach
     </div>
 
