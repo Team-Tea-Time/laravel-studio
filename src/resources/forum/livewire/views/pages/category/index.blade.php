@@ -1,4 +1,5 @@
 <div>
+    @include ('forum::components.loading-overlay')
     @include ('forum::components.breadcrumbs')
 
     <h1>{{ trans('forum::general.index') }}</h1>

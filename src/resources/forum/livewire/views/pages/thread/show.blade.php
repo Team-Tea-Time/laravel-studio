@@ -1,4 +1,5 @@
 <div x-data="thread">
+    @include ('forum::components.loading-overlay')
     @include ('forum::components.breadcrumbs')
 
     <h1 class="mb-0" style="color: {{ $thread->category->color }}">{{ $thread->title }}</h1>
@@ -31,6 +32,17 @@
             @endif
         </div>
     </div>
+
+    @if (count($selectablePostIds) > 0)
+        <div class="flex justify-end">
+            @include ('forum::components.form.input-checkbox', [
+                'id' => 'toggle-all',
+                'value' => '',
+                'label' => trans('forum::posts.select_all'),
+                'attributes' => 'x-model=toggledAll @click=toggleAll'
+            ])
+        </div>
+    @endif
 
     <div>
         @foreach ($posts as $post)

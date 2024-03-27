@@ -1,4 +1,5 @@
 <div x-data="category" x-on:page-changed="onPageChanged">
+    @include ('forum::components.loading-overlay')
     @include ('forum::components.breadcrumbs')
 
     <h1 class="mb-0" style="color: {{ $category->color }}">{{ $category->title }}</h1>
@@ -21,14 +22,16 @@
         @endif
     </div>
 
-    <div class="flex justify-end">
-        @include ('forum::components.form.input-checkbox', [
-            'id' => 'toggle-all',
-            'value' => '',
-            'label' => trans('forum::threads.select_all'),
-            'attributes' => 'x-model=toggledAll @click=toggleAll'
-        ])
-    </div>
+    @if (count($selectableThreadIds) > 0)
+        <div class="flex justify-end">
+            @include ('forum::components.form.input-checkbox', [
+                'id' => 'toggle-all',
+                'value' => '',
+                'label' => trans('forum::threads.select_all'),
+                'attributes' => 'x-model=toggledAll @click=toggleAll'
+            ])
+        </div>
+    @endif
 
     <div class="my-4">
         @foreach ($threads as $thread)
@@ -39,7 +42,7 @@
         @endforeach
     </div>
 
-    <div x-show="selectedThreads.length > 0" class="fixed bottom-0 right-0 z-50 bg-white shadow-md rounded-md m-4 p-6">
+    <div x-show="selectedThreads.length > 0" class="fixed bottom-0 right-0 z-40 bg-white shadow-md rounded-md m-4 p-6">
         <p class="font-medium">{{ trans('forum::general.with_selection') }}</p>
 
         @include ('forum::components.form.button', [

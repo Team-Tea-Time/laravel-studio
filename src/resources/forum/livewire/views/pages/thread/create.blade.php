@@ -1,4 +1,5 @@
 <div>
+    @include ('forum::components.loading-overlay')
     @include ('forum::components.breadcrumbs')
 
     <div class="flex justify-center items-center">
