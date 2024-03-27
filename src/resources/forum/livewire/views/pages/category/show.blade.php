@@ -65,53 +65,53 @@
 
 @script
 <script>
-    Alpine.data('category', () => {
-        return {
-            toggledAll: false,
-            selectedThreads: [],
-            reset() {
-                this.toggledAll = false;
-                this.selectedThreads = [];
-            },
-            onThreadChanged(event) {
-                if (event.detail.isSelected) {
-                    this.selectedThreads.push(event.detail.id);
-                } else {
-                    this.selectedThreads.splice(this.selectedThreads.indexOf(event.detail.id), 1);
-                }
-            },
-            onPageChanged(event) {
-                this.reset();
-            },
-            async lockThreads(event) {
-                const result = await $wire.lockThreads(this.selectedThreads);
-                if (result.type == 'success') this.reset();
-                $dispatch('alert', result);
-            },
-            async unlockThreads(event) {
-                const result = await $wire.unlockThreads(this.selectedThreads);
-                if (result.type == 'success') this.reset();
-                $dispatch('alert', result);
-            },
-            async pinThreads(event) {
-                const result = await $wire.pinThreads(this.selectedThreads);
-                if (result.type == 'success') this.reset();
-                $dispatch('alert', result);
-            },
-            async unpinThreads(event) {
-                const result = await $wire.unpinThreads(this.selectedThreads);
-                if (result.type == 'success') this.reset();
-                $dispatch('alert', result);
-            },
-            toggleAll(event) {
-                this.toggledAll = !this.toggledAll;
-                const checkboxes = document.querySelectorAll('[data-thread] input[type=checkbox]');
-                checkboxes.forEach(checkbox => {
-                    checkbox.checked = this.toggledAll;
-                    checkbox.dispatchEvent(new Event('change'));
-                });
+Alpine.data('category', () => {
+    return {
+        toggledAll: false,
+        selectedThreads: [],
+        reset() {
+            this.toggledAll = false;
+            this.selectedThreads = [];
+        },
+        onThreadChanged(event) {
+            if (event.detail.isSelected) {
+                this.selectedThreads.push(event.detail.id);
+            } else {
+                this.selectedThreads.splice(this.selectedThreads.indexOf(event.detail.id), 1);
             }
+        },
+        onPageChanged(event) {
+            this.reset();
+        },
+        async lockThreads(event) {
+            const result = await $wire.lockThreads(this.selectedThreads);
+            if (result.type == 'success') this.reset();
+            $dispatch('alert', result);
+        },
+        async unlockThreads(event) {
+            const result = await $wire.unlockThreads(this.selectedThreads);
+            if (result.type == 'success') this.reset();
+            $dispatch('alert', result);
+        },
+        async pinThreads(event) {
+            const result = await $wire.pinThreads(this.selectedThreads);
+            if (result.type == 'success') this.reset();
+            $dispatch('alert', result);
+        },
+        async unpinThreads(event) {
+            const result = await $wire.unpinThreads(this.selectedThreads);
+            if (result.type == 'success') this.reset();
+            $dispatch('alert', result);
+        },
+        toggleAll(event) {
+            this.toggledAll = !this.toggledAll;
+            const checkboxes = document.querySelectorAll('[data-thread] input[type=checkbox]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = this.toggledAll;
+                checkbox.dispatchEvent(new Event('change'));
+            });
         }
-    })
+    }
+});
 </script>
 @endscript

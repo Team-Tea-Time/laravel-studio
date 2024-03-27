@@ -14,7 +14,7 @@
             {{ trans('forum::general.home_title') }}
         </title>
 
-        @vite(['resources/forum/livewire/css/forum.css'])
+        @vite(['resources/forum/livewire/css/forum.css', 'resources/forum/livewire/js/forum.js'])
     </head>
     <body class="forum bg-slate-200">
         <div class="bg-white shadow-md border-b border-slate-100">
@@ -34,5 +34,18 @@
         </div>
 
         <livewire:forum::components.alerts />
+
+        <script>
+            document.addEventListener('alpine:init', () => {
+                Alpine.store('time', {
+                    now: new Date(),
+                    init() {
+                        setInterval(() => {
+                            this.now = new Date();
+                        }, 1000);
+                    }
+                })
+            })
+        </script>
     </body>
 </html>

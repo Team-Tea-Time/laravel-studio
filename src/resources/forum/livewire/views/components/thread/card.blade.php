@@ -40,7 +40,7 @@
             </a>
             {{ $thread->author->name }}
             <span class="text-slate-500">
-                @include ('forum::components.timestamp', ['carbon' => $thread->created_at])
+                <livewire:forum::components.timestamp :carbon="$thread->created_at" />
             </span>
         </div>
         <div class="grow align-center text-center">
@@ -52,7 +52,9 @@
             <a href="{{ Forum::route('thread.show', $thread->lastPost) }}" class="text-lg font-medium">{{ trans('forum::posts.view') }} @include ("forum::components.icons.arrow-right-mini")</a>
             <br>
             {{ $thread->lastPost->authorName }}
-            <span class="text-slate-500">@include ('forum::components.timestamp', ['carbon' => $thread->lastPost->created_at])</span>
+            <span class="text-slate-500">
+                <livewire:forum::components.timestamp :carbon="$thread->lastPost->created_at" />
+            </span>
         </div>
         @if ($selectable)
             <div class="pl-4">
@@ -83,6 +85,6 @@ Alpine.data('threadCard', () => {
             $dispatch('change', { isSelected: event.target.checked, id: event.target.value });
         }
     }
-})
+});
 </script>
 @endscript

@@ -37,7 +37,7 @@
             <livewire:forum::components.post.card
                 :$post
                 :key="$post->id . $updateKey"
-                :selectable="$post->sequence > 1 && in_array($post->id, $selectablePostIds)" />
+                :selectable="in_array($post->id, $selectablePostIds)" />
         @endforeach
     </div>
 
@@ -63,39 +63,39 @@
 
 @script
 <script>
-    Alpine.data('thread', () => {
-        return {
-            toggledAll: false,
-            selectedPosts: [],
-            reset() {
-                this.toggledAll = false;
-                this.selectedPosts = [];
-            },
-            onPostChanged(event) {
-                if (event.detail.isSelected) {
-                    this.selectedPosts.push(event.detail.id);
-                } else {
-                    this.selectedPosts.splice(this.selectedPosts.indexOf(event.detail.id), 1);
-                }
-            },
-            onPageChanged(event) {
-                this.reset();
-            },
-            async reply(event) {
-                const result = await $wire.reply();
-                if (result === null) return;
-                if (result.type == 'success') this.reset();
-                $dispatch('alert', result);
-            },
-            toggleAll(event) {
-                this.toggledAll = !this.toggledAll;
-                const checkboxes = document.querySelectorAll('[data-post] input[type=checkbox]');
-                checkboxes.forEach(checkbox => {
-                    checkbox.checked = this.toggledAll;
-                    checkbox.dispatchEvent(new Event('change'));
-                });
+Alpine.data('thread', () => {
+    return {
+        toggledAll: false,
+        selectedPosts: [],
+        reset() {
+            this.toggledAll = false;
+            this.selectedPosts = [];
+        },
+        onPostChanged(event) {
+            if (event.detail.isSelected) {
+                this.selectedPosts.push(event.detail.id);
+            } else {
+                this.selectedPosts.splice(this.selectedPosts.indexOf(event.detail.id), 1);
             }
+        },
+        onPageChanged(event) {
+            this.reset();
+        },
+        async reply(event) {
+            const result = await $wire.reply();
+            if (result === null) return;
+            if (result.type == 'success') this.reset();
+            $dispatch('alert', result);
+        },
+        toggleAll(event) {
+            this.toggledAll = !this.toggledAll;
+            const checkboxes = document.querySelectorAll('[data-post] input[type=checkbox]');
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = this.toggledAll;
+                checkbox.dispatchEvent(new Event('change'));
+            });
         }
-    })
+    }
+});
 </script>
 @endscript

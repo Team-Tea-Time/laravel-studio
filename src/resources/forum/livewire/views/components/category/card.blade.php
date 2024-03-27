@@ -24,13 +24,13 @@
                 @if ($category->newestThread)
                     <div>
                         <a href="{{ $category->newestThread->route }}">{{ $category->newestThread->title }}</a>
-                        @include ('forum::components.timestamp', ['carbon' => $category->newestThread->created_at])
+                        <livewire:forum::components.timestamp :carbon="$category->newestThread->createdAt" />
                     </div>
                 @endif
                 @if ($category->latestActiveThread && $category->latestActiveThread->reply_count > 1)
                     <div>
                         <a href="{{ $category->latestActiveThread->lastPost->route }}">Re: {{ $category->latestActiveThread->title }}</a>
-                        @include ('forum::components.timestamp', ['carbon' => $category->latestActiveThread->lastPost->created_at])
+                        <livewire:forum::components.timestamp :carbon="$category->latestActiveThread->lastPost->created_at" />
                     </div>
                 @endif
             @endif
@@ -65,13 +65,13 @@
                             @if ($subcategory->newestThread)
                                 <div>
                                     <a href="{{ $subcategory->newestThread->route }}">{{ $subcategory->newestThread->title }}</a>
-                                    @include ('forum::components.timestamp', ['carbon' => $subcategory->newestThread->created_at])
+                                    <livewire:forum::components.timestamp :carbon="$subcategory->newestThread->created_at" />
                                 </div>
                             @endif
                             @if ($subcategory->latestActiveThread && $subcategory->latestActiveThread->reply_count > 1)
                                 <div>
                                     <a href="{{ $subcategory->latestActiveThread->lastPost->route }}">Re: {{ $subcategory->latestActiveThread->title }}</a>
-                                    @include ('forum::components.timestamp', ['carbon' => $subcategory->latestActiveThread->lastPost->created_at])
+                                    <livewire:forum::components.timestamp :carbon="$subcategory->latestActiveThread->lastPost->created_at" />
                                 </div>
                             @endif
                         @endif

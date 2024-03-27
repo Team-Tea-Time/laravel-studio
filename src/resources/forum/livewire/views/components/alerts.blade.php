@@ -59,6 +59,6 @@ Alpine.data('alerts', () => {
             });
         }
     }
-})
+});
 </script>
 @endscript

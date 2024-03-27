@@ -1,5 +1,5 @@
 <div id="post-{{ $post->sequence }}" class="post-card my-4" x-data="postCard" data-post="{{ $post->id }}" {{ $selectable ? 'x-on:change=onPostChanged' : '' }}>
-    <div class="bg-white outline shadow-md rounded-lg flex items-stretch" {{ $post->trashed() ? 'opacity-75' : '' }}" :class="classes">
+    <div class="bg-white shadow-md rounded-lg flex items-stretch" {{ $post->trashed() ? 'opacity-75' : '' }}" :class="classes">
         <div class="flex flex-col min-w-48 p-6 border-r border-slate-200">
             <div class="grow text-lg font-medium">
                 {{ $post->authorName }}
@@ -29,9 +29,9 @@
 
             <div class="flex mt-4">
                 <div class="grow text-slate-500">
-                    @include ('forum::components.timestamp', ['carbon' => $post->created_at])
+                    <livewire:forum::components.timestamp :carbon="$post->created_at" />
                     @if ($post->hasBeenUpdated())
-                        ({{ trans('forum::general.last_updated') }} @include ('forum::components.timestamp', ['carbon' => $post->updated_at]))
+                        ({{ trans('forum::general.last_updated') }} <livewire:forum::components.timestamp :carbon="$post->updated_at" />)
                     @endif
                 </div>
                 <div>
@@ -62,6 +62,6 @@ Alpine.data('postCard', () => {
             $dispatch('change', { isSelected: event.target.checked, id: event.target.value });
         }
     }
-})
+});
 </script>
 @endscript
