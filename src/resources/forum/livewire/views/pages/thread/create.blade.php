@@ -8,18 +8,25 @@
 
             <div class="bg-white rounded-md shadow-md my-2 p-6">
                 <form wire:submit="save">
-                    @include ('forum::components.form.input-text', ['model' => 'title', 'label' => trans('forum::general.title')])
-                    @include ('forum::components.form.textarea', ['model' => 'content'])
+                    <x-forum::form.input-text
+                        id="title"
+                        value=""
+                        :label="trans('forum::general.title')"
+                        wire:model="title" />
+
+                    <x-forum::form.input-textarea
+                        id="content"
+                        wire:model="content" />
 
                     <div class="flex mt-6">
                         <div class="grow">
-                            <livewire:forum::components.button
+                            <x-forum::button
                                 href="{{ URL::previous() }}"
                                 type="secondary"
                                 label="{{ trans('forum::general.cancel') }}" />
                         </div>
                         <div class="grow text-right">
-                            @include ('forum::components.form.button', ['label' => trans('forum::general.create')])
+                            <x-forum::form.button :label="trans('forum::general.create')" type="submit" />
                         </div>
                     </div>
                 </form>

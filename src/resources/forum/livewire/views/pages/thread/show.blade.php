@@ -35,12 +35,12 @@
 
     @if (count($selectablePostIds) > 0)
         <div class="flex justify-end">
-            @include ('forum::components.form.input-checkbox', [
-                'id' => 'toggle-all',
-                'value' => '',
-                'label' => trans('forum::posts.select_all'),
-                'attributes' => 'x-model=toggledAll @click=toggleAll'
-            ])
+            <x-forum::form.input-checkbox
+                id="toggle-all"
+                value=""
+                :label="trans('forum::posts.select_all')"
+                x-model="toggledAll"
+                on-click="toggleAll" />
         </div>
     @endif
 
@@ -59,15 +59,10 @@
         <h2>{{ trans('forum::general.quick_reply') }}</h2>
 
         <div class="bg-white rounded-md shadow-md p-6 mt-4">
-            @include ('forum::components.form.textarea', [
-                'model' => 'content',
-            ])
+            <x-forum::form.input-textarea wire:model="content" />
 
             <div class="text-right mt-6">
-                @include ('forum::components.form.button', [
-                    'label' => trans('forum::general.reply'),
-                    'attributes' => '@click=reply'
-                ])
+                <x-forum::form.button :label="trans('forum::general.reply')" @click="reply" />
             </div>
         </div>
     @endif

@@ -23,13 +23,15 @@
             @if ($category->accepts_threads)
                 @if ($category->newestThread)
                     <div>
-                        <a href="{{ $category->newestThread->route }}">{{ $category->newestThread->title }}</a>
-                        <livewire:forum::components.timestamp :carbon="$category->newestThread->createdAt" />
+                        @include ("forum::components.icons.chat-bubbles-mini")
+                        <a href="{{ $category->newestThread->route }}">{{ \Illuminate\Support\Str::limit($category->newestThread->title, 40) }}</a>
+                        <livewire:forum::components.timestamp :carbon="$category->newestThread->created_at" />
                     </div>
                 @endif
                 @if ($category->latestActiveThread && $category->latestActiveThread->reply_count > 1)
                     <div>
-                        <a href="{{ $category->latestActiveThread->lastPost->route }}">Re: {{ $category->latestActiveThread->title }}</a>
+                        @include ("forum::components.icons.chat-bubble-text-mini")
+                        <a href="{{ $category->latestActiveThread->lastPost->route }}">Re: {{ \Illuminate\Support\Str::limit($category->latestActiveThread->title, 40) }}</a>
                         <livewire:forum::components.timestamp :carbon="$category->latestActiveThread->lastPost->created_at" />
                     </div>
                 @endif
@@ -64,13 +66,15 @@
                         @if ($subcategory->accepts_threads)
                             @if ($subcategory->newestThread)
                                 <div>
-                                    <a href="{{ $subcategory->newestThread->route }}">{{ $subcategory->newestThread->title }}</a>
+                                    @include ("forum::components.icons.chat-bubbles-mini")
+                                    <a href="{{ $subcategory->newestThread->route }}">{{ \Illuminate\Support\Str::limit($subcategory->newestThread->title, 40) }}</a>
                                     <livewire:forum::components.timestamp :carbon="$subcategory->newestThread->created_at" />
                                 </div>
                             @endif
                             @if ($subcategory->latestActiveThread && $subcategory->latestActiveThread->reply_count > 1)
                                 <div>
-                                    <a href="{{ $subcategory->latestActiveThread->lastPost->route }}">Re: {{ $subcategory->latestActiveThread->title }}</a>
+                                    @include ("forum::components.icons.chat-bubble-text-mini")
+                                    <a href="{{ $subcategory->latestActiveThread->lastPost->route }}">Re: {{ \Illuminate\Support\Str::limit($subcategory->latestActiveThread->title, 40) }}</a>
                                     <livewire:forum::components.timestamp :carbon="$subcategory->latestActiveThread->lastPost->created_at" />
                                 </div>
                             @endif

@@ -58,11 +58,10 @@
         </div>
         @if ($selectable)
             <div class="pl-4">
-                @include ('forum::components.form.input-checkbox', [
-                    'id' => '',
-                    'value' => $thread->id,
-                    'attributes' => '@change=onChanged'
-                ])
+                <x-forum::form.input-checkbox
+                    id=""
+                    :value="$thread->id"
+                    @change="onChanged" />
             </div>
         @endif
     </div>

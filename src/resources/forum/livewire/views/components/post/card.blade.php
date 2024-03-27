@@ -15,11 +15,11 @@
                 @can ('deletePosts', $post->thread)
                     @can ('delete', $post)
                         <div class="float-right">
-                            @include ('forum::components.form.input-checkbox', [
-                                'id' => '',
-                                'value' => $post->id,
-                                'attributes' => '@change=onChanged'
-                            ])
+                            <x-forum::form.input-checkbox
+                                id=""
+                                :value="$post->id"
+                                :label="trans('forum::general.perma_delete')"
+                                @change="onChanged" />
                         </div>
                     @endcan
                 @endcan
