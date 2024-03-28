@@ -5,6 +5,17 @@
     <h1 class="mb-0" style="color: {{ $category->color }}">{{ $category->title }}</h1>
     <h2 class="mt-0 text-slate-500">{{ $category->description }}</h2>
 
+    <div class="flex mt-6 mb-8">
+        <div class="grow">
+            @can ('edit', $category)
+                <x-forum::link-button
+                    type="secondary"
+                    :href="Forum::route('category.edit', $category)"
+                    :label="trans('forum::categories.edit')" />
+            @endcan
+        </div>
+    </div>
+
     @foreach ($category->descendants as $child)
         <livewire:forum::components.category.card :category="$child" :key="$child->id" />
     @endforeach

@@ -51,7 +51,7 @@
         @apply text-xl;
     }
 
-    a {
+    a:not(.link-button) {
         @apply text-slate-600 hover:text-slate-900;
     }
 }
