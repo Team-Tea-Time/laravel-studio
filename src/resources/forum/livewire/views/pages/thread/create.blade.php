@@ -22,7 +22,7 @@
                         <div class="grow">
                             <x-forum::button
                                 href="{{ URL::previous() }}"
-                                type="secondary"
+                                intent="secondary"
                                 label="{{ trans('forum::general.cancel') }}" />
                         </div>
                         <div class="grow text-right">

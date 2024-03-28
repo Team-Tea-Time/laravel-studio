@@ -9,11 +9,19 @@
         <div class="grow">
             @can ('edit', $category)
                 <x-forum::link-button
-                    type="secondary"
+                    intent="secondary"
                     :href="Forum::route('category.edit', $category)"
                     :label="trans('forum::categories.edit')" />
             @endcan
         </div>
+        @can ('createCategories')
+            <div>
+                <x-forum::link-button
+                    :label="trans('forum::categories.create')"
+                    icon="squares-plus-outline"
+                    :href="Forum::route('category.create') . '?parent_id=' . $category->id" />
+            </div>
+        @endcan
     </div>
 
     @foreach ($category->descendants as $child)

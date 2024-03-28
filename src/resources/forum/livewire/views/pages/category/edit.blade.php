@@ -1,4 +1,4 @@
-<div>
+<div x-data="editCategory">
     @include ('forum::components.loading-overlay')
     @include ('forum::components.breadcrumbs')
 
@@ -45,11 +45,57 @@
                         :label="trans('forum::categories.make_private')"
                         wire:model="is_private" />
 
-                    <div class="text-center mt-4">
-                        <x-forum::button :label="trans('forum::general.save')" type="submit" />
+                    <div class="flex mt-4">
+                        <div class="grow">
+                            <x-forum::button
+                                intent="danger"
+                                :label="trans('forum::general.delete')"
+                                @click.prevent="requestDelete" />
+                        </div>
+                        <div>
+                            <x-forum::button :label="trans('forum::general.save')" type="submit" />
+                        </div>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <x-forum::modal
+        :heading="trans('forum::general.generic_confirm')"
+        x-show="showDeleteModal"
+        onClose="showDeleteModal = false">
+        {{ trans('forum::categories.confirm_nonempty_delete') }}
+
+        <div class="flex mt-4">
+            <div class="grow">
+                <x-forum::button
+                    intent="secondary"
+                    :label="trans('forum::general.cancel')"
+                    @click="showDeleteModal = false" />
+            </div>
+            <div>
+                <x-forum::button
+                    intent="primary"
+                    :label="trans('forum::general.proceed')"
+                    @click="confirmDelete" />
+            </div>
+        </div>
+    </x-forum::modal>
 </div>
+
+@script
+<script>
+Alpine.data('editCategory', () => {
+    return {
+        showDeleteModal: false,
+        requestDelete(event) {
+            this.showDeleteModal = true;
+        },
+        confirmDelete() {
+            $wire.delete();
+        }
+    }
+});
+</script>
+@endscript

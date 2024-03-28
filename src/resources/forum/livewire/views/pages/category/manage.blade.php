@@ -6,6 +6,15 @@
         <div class="grow max-w-screen-lg">
             <h1>{{ trans('forum::general.manage') }}</h1>
 
+            @can ('createCategories')
+                <div class="mb-6 text-right">
+                    <x-forum::link-button
+                        :label="trans('forum::categories.create')"
+                        icon="squares-plus-outline"
+                        :href="Forum::route('category.create')" />
+                </div>
+            @endcan
+
             <div class="bg-white rounded-md shadow-md my-2 p-6">
                 <ol id="category-tree">
                     @include ('forum::components.category.draggable-items', ['categories' => $categories])

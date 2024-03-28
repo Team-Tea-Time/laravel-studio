@@ -1,7 +1,8 @@
 @php
-$colorClasses = match ($type) {
+$colorClasses = match ($intent) {
     'primary', '', null => 'text-white bg-blue-600 hover:text-white hover:bg-blue-500',
-    'secondary' => 'text-zinc-800 bg-zinc-300 opacity-70 hover:opacity-100'
+    'secondary' => 'text-zinc-800 bg-zinc-300 opacity-70 hover:opacity-100',
+    'danger' => 'text-white bg-red-500 hover:bg-red-400'
 };
 @endphp
 
