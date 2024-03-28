@@ -14,11 +14,10 @@
             @if ($selectable)
                 @can ('deletePosts', $post->thread)
                     @can ('delete', $post)
-                        <div class="float-right">
+                        <div class="inline-block float-right">
                             <x-forum::form.input-checkbox
                                 id=""
                                 :value="$post->id"
-                                :label="trans('forum::general.perma_delete')"
                                 @change="onChanged" />
                         </div>
                     @endcan

@@ -11,6 +11,7 @@
             @can ('createCategories')
                 <x-forum::link-button
                     :label="trans('forum::categories.create')"
+                    icon="squares-plus-outline"
                     :href="Forum::route('category.create')" />
             @endcan
         </div>

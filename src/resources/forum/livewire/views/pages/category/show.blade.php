@@ -77,11 +77,20 @@
                 x-model="permadelete" />
         @endif
 
+        <x-forum::form.input-select
+            id="destination-category"
+            :label="trans_choice('forum::categories.category', 1)"
+            x-show="selectedAction == 'move'"
+            x-model="destinationCategory">
+            <option value="0" disabled>...</option>
+            @include ('forum::components.category.options', ['categories' => $threadDestinationCategories, 'disable' => $category->id])
+        </x-forum::form.input-select>
+
         <x-forum::button
             :label="trans('forum::general.proceed')"
             @click="applySelectedAction"
             :wire-confirm="trans('forum::general.generic_confirm')"
-            x-bind:disabled="selectedAction == 'none'" />
+            x-bind:disabled="selectedAction == 'none' || selectedAction == 'move' && destinationCategory == 0" />
     </div>
 
     {{ $threads->links('forum::components.pagination') }}
@@ -95,11 +104,13 @@ Alpine.data('category', () => {
         selectedThreads: [],
         selectedAction: 'none',
         permadelete: false,
+        destinationCategory: 0,
         confirmMessage: "{{ trans('forum::general.generic_confirm') }}",
         reset() {
             this.toggledAll = false;
             this.selectedThreads = [];
             this.permadelete = false;
+            this.destinationCategory = 0;
         },
         onThreadChanged(event) {
             if (event.detail.isSelected) {
@@ -116,8 +127,6 @@ Alpine.data('category', () => {
                 return;
             }
 
-            console.log(this.selectedAction, this.selectedThreads, this.permadelete);
-
             let result;
             switch (this.selectedAction) {
                 case 'delete':
@@ -128,7 +137,7 @@ Alpine.data('category', () => {
                     result = await $wire.restoreThreads(this.selectedThreads);
                     break;
                 case 'move':
-                    result = await $wire.moveThreads(this.selectedThreads);
+                    result = await $wire.moveThreads(this.selectedThreads, this.destinationCategory);
                     break;
                 case 'lock':
                     result = await $wire.lockThreads(this.selectedThreads);

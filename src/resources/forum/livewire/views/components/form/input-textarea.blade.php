@@ -1,4 +1,4 @@
-<div class="mb-4">
+<div {!! isset($xShow) && !empty($xShow) ? "x-show=\"{$xShow}\"" : "" !!} class="mb-4">
     @if (isset($label))
         <label for="{{ $id }}" class="block mb-2 font-medium text-gray-900">{{ $label }}</label>
     @endif

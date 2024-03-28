@@ -59,7 +59,8 @@
         <h2>{{ trans('forum::general.quick_reply') }}</h2>
 
         <div class="bg-white rounded-md shadow-md p-6 mt-4">
-            <x-forum::form.input-textarea wire:model="content" />
+            <x-forum::form.input-textarea
+                wire:model="content" />
 
             <div class="text-right mt-6">
                 <x-forum::button :label="trans('forum::general.reply')" @click="reply" />
