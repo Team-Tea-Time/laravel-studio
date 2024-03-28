@@ -4,7 +4,8 @@
 
     <div class="flex justify-center items-center">
         <div class="grow max-w-screen-md">
-            <h1>{{ trans('forum::categories.edit') }}</h1>
+            <h1 class="mb-2">{{ trans('forum::categories.edit') }}</h1>
+            <h2 class="mb-4 text-slate-500">{{ $category->title }}</h2>
 
             <div class="bg-white rounded-md shadow-md my-2 p-6">
                 <form wire:submit="save">
