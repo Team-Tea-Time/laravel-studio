@@ -19,6 +19,7 @@
     },
     "dependencies": {
         "@melloware/coloris": "^0.23.0",
-        "date-fns": "^3.6.0"
+        "date-fns": "^3.6.0",
+        "nested-sort": "^5.2.0"
     }
 }
