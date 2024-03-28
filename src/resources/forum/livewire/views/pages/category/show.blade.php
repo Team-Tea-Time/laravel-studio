@@ -59,6 +59,12 @@
                 :key="$thread->id . $updateKey"
                 :selectable="in_array($thread->id, $selectableThreadIds)" />
         @endforeach
+
+        @if ($category->accepts_threads && $threads->count() == 0)
+            <div class="p-6 border border-slate-300 rounded-md text-center text-slate-500 text-lg font-medium">
+                {{ trans('forum::threads.none_found') }}
+            </div>
+        @endif
     </div>
 
     <div x-show="selectedThreads.length > 0" class="fixed bottom-0 right-0 z-40 min-w-96 bg-white shadow-md rounded-md m-4 p-6">

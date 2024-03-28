@@ -24,8 +24,10 @@
                 </div>
                 <div class="text-lg self-center">
                     <a href="/" class="mx-2">Home</a>
-                    <a href="{{ route('forum.category.index') }}" class="mx-2">Forum</a>
-                    <a href="{{ route('forum.category.order') }}" class="mx-2">Manage</a>
+                    <a href="{{ route('forum.category.index') }}" class="mx-2">{{ trans('forum::general.home_title') }}</a>
+                    <a href="{{ route('forum.recent') }}" class="mx-2">{{ trans('forum::threads.recent') }}</a>
+                    <a href="{{ route('forum.unread') }}" class="mx-2">{{ trans('forum::threads.unread_updated') }}</a>
+                    <a href="{{ route('forum.category.order') }}" class="mx-2">{{ trans('forum::general.manage') }}</a>
                 </div>
             </div>
         </div>

@@ -1,7 +1,7 @@
 <div class="thread-card my-4" x-data="threadCard" data-thread="{{ $thread->id }}" {{ $selectable ? 'x-on:change=onThreadChanged' : '' }}>
     <div class="bg-white transition ease-in-out shadow-md rounded-lg p-4 flex items-center justify-items-center {{ $thread->trashed() ? 'opacity-75' : '' }}" :class="classes">
         <div class="grow flex-1">
-            <a href="{{ $thread->route }}" class="block text-xl mb-2" style="color: {{ $thread->category->color }}">
+            <a href="{{ $thread->route }}" class="block text-xl mb-2">
                 @if ($thread->pinned)
                     <livewire:forum::components.pill
                         bg-color="bg-amber-400"
@@ -34,10 +34,16 @@
                         icon="trash-mini"
                         :text="trans('forum::general.deleted')" />
                 @endif
-                <span class="inline-block align-middle">
+                <span class="inline-block align-middle" @if (!$showCategory) style="color: {{ $thread->category->color }}"@endif>
                     {{ $thread->title }}
                 </span>
             </a>
+            @if ($showCategory)
+                <a href="{{ $thread->category->route }}" class="font-medium" style="color: {{ $thread->category->color }}">
+                    {{ $thread->category->title }}
+                </a>
+                <span class="mx-1 text-slate-500">•</span>
+            @endif
             {{ $thread->author->name }}
             <span class="text-slate-500">
                 <livewire:forum::components.timestamp :carbon="$thread->created_at" />
