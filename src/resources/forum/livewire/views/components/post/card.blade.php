@@ -1,27 +1,20 @@
 <div id="post-{{ $post->sequence }}" class="post-card my-4" x-data="postCard" data-post="{{ $post->id }}" {{ $selectable ? 'x-on:change=onPostChanged' : '' }}>
     <div class="bg-white shadow-md rounded-lg flex items-stretch" {{ $post->trashed() ? 'opacity-75' : '' }}" :class="classes">
-        <div class="flex flex-col min-w-48 p-6 border-r border-slate-200">
-            <div class="grow text-lg font-medium">
-                {{ $post->authorName }}
+        @if ($showAuthorPane)
+            <div class="flex flex-col min-w-48 p-6 border-r border-slate-200">
+                <div class="grow text-lg font-medium">
+                    {{ $post->authorName }}
+                </div>
+                <div>
+                    @if (! isset($single) || ! $single)
+                        <a href="{{ Forum::route('thread.show', $post) }}">#{{ $post->sequence }}</a>
+                    @endif
+                </div>
             </div>
-            <div>
-                @if (! isset($single) || ! $single)
-                    <a href="{{ Forum::route('thread.show', $post) }}">#{{ $post->sequence }}</a>
-                @endif
-            </div>
-        </div>
+        @endif
         <div class="grow p-6">
-            @if ($selectable)
-                @can ('deletePosts', $post->thread)
-                    @can ('delete', $post)
-                        <div class="inline-block float-right">
-                            <x-forum::form.input-checkbox
-                                id=""
-                                :value="$post->id"
-                                @change="onChanged" />
-                        </div>
-                    @endcan
-                @endcan
+            @if (isset($post->parent))
+                <livewire:forum::components.post.quote :post="$post->parent" />
             @endif
 
             {!! Forum::render($post->content) !!}
@@ -33,11 +26,50 @@
                         ({{ trans('forum::general.last_updated') }} <livewire:forum::components.timestamp :carbon="$post->updated_at" />)
                     @endif
                 </div>
-                <div>
-                    <a href="{{ $post->route }}" class="text-slate-500">
-                        {{ trans('forum::general.permalink') }}
-                    </a>
-                </div>
+                @if (!isset($single) || !$single)
+                    <div>
+                        @if (!$post->trashed())
+                            <a href="{{ Forum::route('post.show', $post) }}" class="font-medium">
+                                {{ trans('forum::general.permalink') }}
+                            </a>
+                            @if ($post->sequence != 1)
+                                @can ('deletePosts', $post->thread)
+                                    @can ('delete', $post)
+
+                                    @endcan
+                                @endcan
+                            @endif
+                            @can ('edit', $post)
+                                <a href="{{ Forum::route('post.edit', $post) }}" class="font-medium ml-2">
+                                    {{ trans('forum::general.edit') }}
+                                </a>
+                            @endcan
+                            @can ('reply', $post->thread)
+                                <a href="{{ Forum::route('thread.reply', $post->thread) }}?parent_id={{ $post->id }}" class="font-medium ml-2">
+                                    {{ trans('forum::general.reply') }}
+                                </a>
+                            @endcan
+                        @else
+                            @can ('restorePosts', $post->thread)
+                                @can ('restore', $post)
+
+                                @endcan
+                            @endcan
+                        @endif
+                        @if ($selectable)
+                            @can ('deletePosts', $post->thread)
+                                @can ('delete', $post)
+                                    <div class="inline-block ml-4" style="margin-bottom: -2rem;">
+                                        <x-forum::form.input-checkbox
+                                            id=""
+                                            :value="$post->id"
+                                            @change="onChanged" />
+                                    </div>
+                                @endcan
+                            @endcan
+                        @endif
+                    </div>
+                @endif
             </div>
         </div>
     </div>

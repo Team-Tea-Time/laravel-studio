@@ -4,6 +4,18 @@
 
     <h1 class="mb-0" style="color: {{ $thread->category->color }}">{{ $thread->title }}</h1>
 
+    <div class="text-right">
+        <x-forum::link-button
+            intent="secondary"
+            href="#quick-reply"
+            :label="trans('forum::general.quick_reply')" />
+
+        <x-forum::link-button
+            intent="primary"
+            :href="Forum::route('thread.reply', $thread)"
+            :label="trans('forum::general.reply')" />
+    </div>
+
     <div class="flex mt-4 mb-6">
         <div class="grow">
             @if ($thread->pinned)
@@ -56,7 +68,7 @@
     {{ $posts->links('forum::components.pagination') }}
 
     @if (!$thread->trashed() && Gate::allows('reply', $thread))
-        <h2>{{ trans('forum::general.quick_reply') }}</h2>
+        <h2 id="quick-reply">{{ trans('forum::general.quick_reply') }}</h2>
 
         <div class="bg-white rounded-md shadow-md p-6 mt-4">
             <x-forum::form.input-textarea wire:model="content" />
