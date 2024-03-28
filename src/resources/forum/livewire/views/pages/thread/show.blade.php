@@ -62,7 +62,7 @@
             <x-forum::form.input-textarea wire:model="content" />
 
             <div class="text-right mt-6">
-                <x-forum::form.button :label="trans('forum::general.reply')" @click="reply" />
+                <x-forum::button :label="trans('forum::general.reply')" @click="reply" />
             </div>
         </div>
     @endif

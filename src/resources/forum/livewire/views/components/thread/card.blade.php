@@ -1,6 +1,6 @@
 <div class="thread-card my-4" x-data="threadCard" data-thread="{{ $thread->id }}" {{ $selectable ? 'x-on:change=onThreadChanged' : '' }}>
     <div class="bg-white transition ease-in-out shadow-md rounded-lg p-4 flex items-center justify-items-center {{ $thread->trashed() ? 'opacity-75' : '' }}" :class="classes">
-        <div class="grow max-w-xl">
+        <div class="grow flex-1">
             <a href="{{ $thread->route }}" class="block text-xl mb-2" style="color: {{ $thread->category->color }}">
                 @if ($thread->pinned)
                     <livewire:forum::components.pill
@@ -43,12 +43,12 @@
                 <livewire:forum::components.timestamp :carbon="$thread->created_at" />
             </span>
         </div>
-        <div class="grow align-center text-center">
+        <div class="min-w-36 align-center text-center">
             <livewire:forum::components.pill
                 icon="chat-bubble-text-mini"
                 :text="trans('forum::general.replies') . ': ' . $thread->reply_count" />
         </div>
-        <div class="grow text-right">
+        <div class="min-w-96 text-right">
             <a href="{{ Forum::route('thread.show', $thread->lastPost) }}" class="text-lg font-medium">{{ trans('forum::posts.view') }} @include ("forum::components.icons.arrow-right-mini")</a>
             <br>
             {{ $thread->lastPost->authorName }}

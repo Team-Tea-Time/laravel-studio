@@ -7,7 +7,7 @@
             <h1>{{ trans('forum::threads.new_thread') }} ({{ $category->title }})</h1>
 
             <div class="bg-white rounded-md shadow-md my-2 p-6">
-                <form wire:submit="save">
+                <form wire:submit="create">
                     <x-forum::form.input-text
                         id="title"
                         value=""
@@ -26,7 +26,7 @@
                                 label="{{ trans('forum::general.cancel') }}" />
                         </div>
                         <div class="grow text-right">
-                            <x-forum::form.button :label="trans('forum::general.create')" type="submit" />
+                            <x-forum::button :label="trans('forum::general.create')" type="submit" />
                         </div>
                     </div>
                 </form>

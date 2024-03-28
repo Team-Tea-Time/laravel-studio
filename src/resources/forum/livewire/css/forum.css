@@ -27,6 +27,10 @@
         content: "/";
     }
 
+    .forum .clr-field button {
+        @apply w-6 h-6 mr-2 rounded-full;
+    }
+
     div, p {
         font-size: 1rem;
     }

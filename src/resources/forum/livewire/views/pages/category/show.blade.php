@@ -47,8 +47,8 @@
 
         <x-forum::form.input-select
             id="selected-action"
-            :label="trans_choice('forum::general.actions', 1)"
             x-model="selectedAction">
+                <option value="none" disabled>{{ trans_choice('forum::general.actions', 1) }}...</option>
             @can ('deleteThreads', $category)
                 <option value="delete">{{ trans('forum::general.delete') }}</option>
             @endcan
@@ -77,10 +77,11 @@
                 x-model="permadelete" />
         @endif
 
-        <x-forum::form.button
+        <x-forum::button
             :label="trans('forum::general.proceed')"
             @click="applySelectedAction"
-            :wire-confirm="trans('forum::general.generic_confirm')" />
+            :wire-confirm="trans('forum::general.generic_confirm')"
+            x-bind:disabled="selectedAction == 'none'" />
     </div>
 
     {{ $threads->links('forum::components.pagination') }}
@@ -92,7 +93,7 @@ Alpine.data('category', () => {
     return {
         toggledAll: false,
         selectedThreads: [],
-        selectedAction: 'delete',
+        selectedAction: 'none',
         permadelete: false,
         confirmMessage: "{{ trans('forum::general.generic_confirm') }}",
         reset() {
