@@ -24,8 +24,8 @@
                 </div>
                 <div class="text-lg self-center">
                     <a href="/" class="mx-2">Home</a>
-                    <a href="/forum" class="mx-2">Forum</a>
-                    <a href="/forum/manage" class="mx-2">Manage</a>
+                    <a href="{{ route('forum.category.index') }}" class="mx-2">Forum</a>
+                    <a href="{{ route('forum.category.order') }}" class="mx-2">Manage</a>
                 </div>
             </div>
         </div>

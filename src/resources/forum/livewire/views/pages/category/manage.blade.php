@@ -40,17 +40,30 @@ Alpine.data('manage', () => {
                     text: 'title',
                 },
                 actions: {
-                    onDrop: this.onDrop
+                    onDrop: () => $refs.button.disabled = false
                 },
                 el: '#category-tree',
                 listItemClassNames: 'border border-slate-300 rounded-md text-lg p-4 my-2'
             });
         },
-        onDrop (data) {
-            $wire.categoryData = data;
-            $refs.button.disabled = false;
+        getItems (ol) {
+            let tree = [];
+            for (let i = 0; i < ol.children.length; ++i) {
+                let item = { id: ol.children[i].dataset.id, children: [] };
+                for (let j = 0; j < ol.children[i].children.length; ++j) {
+                    if (ol.children[i].children[j].tagName == 'OL') {
+                        item.children = this.getItems(ol.children[i].children[j]);
+                    }
+                }
+
+                tree.push(item);
+            }
+
+            return tree;
         },
         async save () {
+            let tree = this.getItems(document.getElementById('category-tree'));
+            $wire.tree = tree;
             const result = await $wire.save();
             $dispatch('alert', result);
             this.initialiseNestedSort();
