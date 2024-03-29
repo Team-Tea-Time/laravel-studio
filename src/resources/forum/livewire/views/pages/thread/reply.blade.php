@@ -12,7 +12,7 @@
                 <livewire:forum::components.post.card :post="$parent" :single="true" :show-author-pane="false" />
             @endif
 
-            <div class="bg-white rounded-md shadow-md my-2 p-6">
+            <div class="bg-white rounded-md shadow-md my-2 p-6 dark:bg-slate-700">
                 <form wire:submit="reply">
                     <x-forum::form.input-textarea
                         id="content"

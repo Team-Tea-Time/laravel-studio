@@ -16,8 +16,8 @@
 
         @vite(['resources/forum/livewire/css/forum.css', 'resources/forum/livewire/js/forum.js'])
     </head>
-    <body class="forum bg-slate-200">
-        <div class="bg-white shadow-md border-b border-slate-100">
+    <body class="forum bg-slate-200 dark:bg-slate-800">
+        <div class="bg-white shadow-md border-b border-slate-100 dark:bg-slate-800 dark:border-slate-700 dark:shadow-none">
             <div class="container flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="/" class="text-lg font-medium">
                     {{ config('app.name') }}

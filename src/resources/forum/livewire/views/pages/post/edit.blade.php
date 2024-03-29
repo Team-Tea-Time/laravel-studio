@@ -13,7 +13,7 @@
                     :label="trans('forum::threads.view')" />
             </div>
 
-            <div class="bg-white rounded-md shadow-md my-2 p-6">
+            <div class="bg-white rounded-md shadow-md my-2 p-6 dark:bg-slate-700">
                 <form wire:submit="save">
                     <x-forum::form.input-textarea
                         id="content"

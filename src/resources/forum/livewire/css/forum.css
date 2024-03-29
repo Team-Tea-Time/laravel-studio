@@ -54,4 +54,14 @@
     a:not(.link-button):not(.group-button) {
         @apply text-slate-600 hover:text-slate-900;
     }
+
+    @media (prefers-color-scheme: dark) {
+        .forum {
+            @apply text-slate-400;
+        }
+
+        a:not(.link-button):not(.group-button) {
+            @apply text-slate-300 hover:text-white;
+        }
+    }
 }

@@ -39,7 +39,7 @@
                     value=""
                     :label="trans('forum::posts.select_all')"
                     x-model="toggledAllPosts"
-                    @click="toggleAll" />
+                    @click="toggleAllPosts" />
             </div>
         @endif
     </div>
@@ -130,7 +130,7 @@
         </div>
         @if (!$thread->trashed())
             @can ('reply', $thread)
-                <div class="mt-4 lg:mt-0">
+                <div class="inline-flex gap-x-2 mt-4 lg:mt-0">
                     <x-forum::link-button
                         intent="secondary"
                         href="#quick-reply"
@@ -160,7 +160,7 @@
         <div id="quick-reply" class="mt-4">
             <h2>{{ trans('forum::general.quick_reply') }}</h2>
 
-            <div class="bg-white rounded-md shadow-md p-6 mt-4">
+            <div class="bg-white rounded-md shadow-md p-6 mt-4 dark:bg-slate-700">
                 <x-forum::form.input-textarea wire:model="threadReplyForm.content" />
 
                 <div class="text-right mt-6">
@@ -170,7 +170,7 @@
         </div>
     @endif
 
-    <div x-show="selectedPosts.length > 0" class="fixed bottom-0 right-0 z-40 left-0 sm:left-auto sm:min-w-96 bg-white shadow-md rounded-md m-4 p-6 z-30">
+    <div x-show="selectedPosts.length > 0" class="fixed bottom-0 right-0 z-40 left-0 sm:left-auto sm:min-w-96 bg-white shadow-md rounded-md m-4 p-6 z-30 dark:bg-slate-700">
         <h3>{{ trans('forum::general.with_selection') }}</h3>
 
         <x-forum::form.input-select
@@ -354,8 +354,9 @@ Alpine.data('thread', () => {
             if (result.type == 'success') this.reset();
             $dispatch('alert', result);
         },
-        toggleAll() {
+        toggleAllPosts() {
             this.toggledAllPosts = !this.toggledAllPosts;
+            if (!this.toggledAllPosts) this.selectedPosts = [];
             const checkboxes = document.querySelectorAll('[data-post] input[type=checkbox]');
             checkboxes.forEach(checkbox => {
                 checkbox.checked = this.toggledAllPosts;

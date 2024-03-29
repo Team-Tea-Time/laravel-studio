@@ -39,7 +39,7 @@
                 </p>
             </div>
 
-            <div>
+            <div class="text-center">
                 <span class="relative z-0 inline-flex rtl:flex-row-reverse shadow-sm rounded-md">
                     {{-- Previous Page Link --}}
                     @if ($paginator->onFirstPage())

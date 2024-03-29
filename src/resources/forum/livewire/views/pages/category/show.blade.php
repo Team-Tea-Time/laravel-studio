@@ -47,8 +47,8 @@
                 id="toggle-all"
                 value=""
                 :label="trans('forum::threads.select_all')"
-                x-model="toggledAll"
-                @click="toggleAll" />
+                x-model="toggledAllThreads"
+                @click="toggleAllThreads" />
         </div>
     @endif
 
@@ -67,7 +67,7 @@
         @endif
     </div>
 
-    <div x-show="selectedThreads.length > 0" class="fixed bottom-0 right-0 z-40 min-w-96 bg-white shadow-md rounded-md m-4 p-6">
+    <div x-show="selectedThreads.length > 0" class="fixed bottom-0 right-0 z-40 min-w-96 bg-white shadow-md rounded-md m-4 p-6 dark:bg-slate-700">
         <h3>{{ trans('forum::general.with_selection') }}</h3>
 
         <x-forum::form.input-select
@@ -124,14 +124,14 @@
 <script>
 Alpine.data('category', () => {
     return {
-        toggledAll: false,
+        toggledAllThreads: false,
         selectedThreads: [],
         selectedAction: 'none',
         permadelete: false,
         destinationCategory: 0,
         confirmMessage: "{{ trans('forum::general.generic_confirm') }}",
         reset() {
-            this.toggledAll = false;
+            this.toggledAllThreads = false;
             this.selectedThreads = [];
             this.permadelete = false;
             this.destinationCategory = 0;
@@ -180,11 +180,12 @@ Alpine.data('category', () => {
             if (result.type == 'success') this.reset();
             $dispatch('alert', result);
         },
-        toggleAll(event) {
-            this.toggledAll = !this.toggledAll;
+        toggleAllThreads(event) {
+            this.toggledAllThreads = !this.toggledAllThreads;
+            if (!this.toggledAllThreads) this.selectedThreads = [];
             const checkboxes = document.querySelectorAll('[data-thread] input[type=checkbox]');
             checkboxes.forEach(checkbox => {
-                checkbox.checked = this.toggledAll;
+                checkbox.checked = this.toggledAllThreads;
                 checkbox.dispatchEvent(new Event('change'));
             });
         }
