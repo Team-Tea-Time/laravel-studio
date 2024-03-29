@@ -1,4 +1,4 @@
-<div x-data="alerts" @alert.window="onReceiveAlert" class="grid place-content-center fixed bottom-4 left-0 right-0">
+<div x-data="alerts" @alert.window="onReceiveAlert" class="grid place-content-center fixed bottom-4 left-0 right-0 z-50">
     <template x-for="alert in list" :key="alert.id">
         <div
             x-show="alert.show"

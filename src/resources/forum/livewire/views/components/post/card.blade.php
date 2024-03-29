@@ -3,7 +3,7 @@
         @if ($showAuthorPane)
             <div class="flex max-w-full sm:max-w-40 lg:max-w-full lg:w-56 px-6 py-4 sm:py-6 border-b sm:border-b-0 sm:border-r border-slate-200">
                 <div class="grow text-lg font-medium truncate">
-                    {{ $post->authorName }} weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+                    {{ $post->authorName }}
                 </div>
                 <div>
                     @if (! isset($single) || ! $single)

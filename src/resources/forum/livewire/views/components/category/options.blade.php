@@ -1,5 +1,5 @@
 @foreach ($categories as $category)
-    <option value="{{ $category->id }}" {{ isset($disable) && $category->id == $disable ? 'disabled' : '' }}>
+    <option value="{{ $category->id }}" {{ isset($disable) && $category->id == $disable || !$category->accepts_threads ? 'disabled' : '' }}>
         @for ($i = 0; $i < $category->depth; ++$i)- @endfor
         {{ $category->title }}
     </option>
