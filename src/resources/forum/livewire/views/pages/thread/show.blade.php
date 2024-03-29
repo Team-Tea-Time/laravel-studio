@@ -1,4 +1,4 @@
-<div x-data="thread">
+<div x-data="thread" x-on:page-changed="onPageChanged">
     @include ('forum::components.loading-overlay')
     @include ('forum::components.breadcrumbs')
 
@@ -38,7 +38,7 @@
                     id="toggle-all"
                     value=""
                     :label="trans('forum::posts.select_all')"
-                    x-model="toggledAll"
+                    x-model="toggledAllPosts"
                     @click="toggleAll" />
             </div>
         @endif
@@ -55,7 +55,7 @@
                             icon="trash-mini"
                             href="#"
                             :label="trans('forum::general.perma_delete')"
-                            @click.prevent="confirmAction('permadelete', '{{ trans('forum::threads.confirm_perma_delete') }}')" />
+                            @click.prevent="confirmThreadAction('permadelete', '{{ trans_choice('forum::threads.confirm_perma_delete', 1) }}')" />
                     @else
                         <x-forum::group-button
                             intent="danger"
@@ -63,7 +63,7 @@
                             icon="trash-mini"
                             href="#"
                             :label="trans('forum::general.delete')"
-                            @click.prevent="confirmAction('delete', '{{ trans('forum::threads.confirm_delete') }}')" />
+                            @click.prevent="confirmThreadAction('delete', '{{ trans_choice('forum::threads.confirm_delete', 1) }}')" />
                     @endif
                 @endif
                 @if ($thread->trashed() && Gate::allows('restoreThreads', $thread->category) && Gate::allows('restore', $thread))
@@ -72,7 +72,7 @@
                         size="small"
                         icon="arrow-path-mini"
                         :label="trans('forum::general.restore')"
-                        @click.prevent="confirmAction('restore', '{{ trans('forum::threads.confirm_restore') }}')" />
+                        @click.prevent="confirmThreadAction('restore', '{{ trans_choice('forum::threads.confirm_restore', 1) }}')" />
                 @endif
                 @if (!$thread->trashed())
                     @can ('lockThreads', $thread->category)
@@ -82,14 +82,14 @@
                                 size="small"
                                 icon="lock-open-mini"
                                 :label="trans('forum::threads.unlock')"
-                                @click.prevent="confirmAction('unlock', '{{ trans('forum::threads.confirm_unlock') }}')" />
+                                @click.prevent="confirmThreadAction('unlock', '{{ trans_choice('forum::threads.confirm_unlock', 1) }}')" />
                         @else
                             <x-forum::group-button
                                 intent="secondary"
                                 size="small"
                                 icon="lock-closed-mini"
                                 :label="trans('forum::threads.lock')"
-                                @click.prevent="confirmAction('lock', '{{ trans('forum::threads.confirm_lock') }}')" />
+                                @click.prevent="confirmThreadAction('lock', '{{ trans_choice('forum::threads.confirm_lock', 1) }}')" />
                         @endif
                     @endcan
                     @can ('pinThreads', $thread->category)
@@ -99,14 +99,14 @@
                                 size="small"
                                 icon="arrow-down-mini"
                                 :label="trans('forum::threads.unpin')"
-                                @click.prevent="confirmAction('unpin', '{{ trans('forum::threads.confirm_unpin') }}')" />
+                                @click.prevent="confirmThreadAction('unpin', '{{ trans_choice('forum::threads.confirm_unpin', 1) }}')" />
                         @else
                             <x-forum::group-button
                                 intent="secondary"
                                 size="small"
                                 icon="arrow-up-mini"
                                 :label="trans('forum::threads.pin')"
-                                @click.prevent="confirmAction('pin', '{{ trans('forum::threads.confirm_pin') }}')" />
+                                @click.prevent="confirmThreadAction('pin', '{{ trans_choice('forum::threads.confirm_pin', 1) }}')" />
                         @endif
                     @endcan
                     @can ('rename', $thread)
@@ -115,7 +115,7 @@
                             size="small"
                             icon="pencil-mini"
                             :label="trans('forum::general.rename')"
-                            @click.prevent="confirmAction('rename', '')" />
+                            @click.prevent="confirmThreadAction('rename', '')" />
                     @endcan
                     @can ('moveThreadsFrom', $thread->category)
                         <x-forum::group-button
@@ -123,7 +123,7 @@
                             size="small"
                             icon="arrow-right-mini"
                             :label="trans('forum::general.move')"
-                            @click.prevent="confirmAction('move', '')" />
+                            @click.prevent="confirmThreadAction('move', '')" />
                     @endcan
                 @endif
             </div>
@@ -170,17 +170,49 @@
         </div>
     @endif
 
-    <x-forum::modal x-show="showConfirmationModal" :heading="trans('forum::general.confirm_action')" onClose="showConfirmationModal = false">
-        <span x-text="confirmationModalText"></span>
+    <div x-show="selectedPosts.length > 0" class="fixed bottom-0 right-0 z-40 min-w-96 bg-white shadow-md rounded-md m-4 p-6 z-30">
+        <h3>{{ trans('forum::general.with_selection') }}</h3>
 
-        <div x-show="action == 'rename'">
+        <x-forum::form.input-select
+            id="bulk-action"
+            x-model="postsAction">
+                <option value="none" disabled>{{ trans_choice('forum::general.actions', 1) }}...</option>
+            @can ('deletePosts', $thread)
+                <option value="delete">{{ trans('forum::general.delete') }}</option>
+            @endcan
+            @can ('restorePosts', $thread)
+                <option value="restore">{{ trans('forum::general.restore') }}</option>
+            @endcan
+        </x-forum::form.input-select>
+
+        @if (config('forum.general.soft_deletes'))
+            <x-forum::form.input-checkbox
+                id="permadelete"
+                value=""
+                :label="trans('forum::general.perma_delete')"
+                x-show="postsAction == 'delete'"
+                x-model="permadeletePosts" />
+        @endif
+
+        <div class="mt-4">
+            <x-forum::button
+                :label="trans('forum::general.proceed')"
+                @click="confirmPostsAction"
+                x-bind:disabled="postsAction == 'none'" />
+        </div>
+    </div>
+
+    <x-forum::modal x-show="showThreadActionConfirmationModal" :heading="trans('forum::general.confirm_action')" onClose="showThreadActionConfirmationModal = false">
+        <span x-text="threadActionConfirmationText"></span>
+
+        <div x-show="threadAction == 'rename'">
             <x-forum::form.input-text
                 id="title"
                 :label="trans('forum::general.title')"
                 wire:model="threadEditForm.title" />
         </div>
 
-        <div x-show="action == 'move'">
+        <div x-show="threadAction == 'move'">
             <x-forum::form.input-select
                 id="destination-category"
                 :label="trans('forum::general.move_to')"
@@ -190,18 +222,37 @@
             </x-forum::form.input-select>
         </div>
 
-        <div class="flex mt-4">
+        <div class="flex mt-6">
             <div class="grow">
                 <x-forum::link-button
                     intent="secondary"
                     :label="trans('forum::general.cancel')"
-                    @click.prevent="showConfirmationModal = false" />
+                    @click.prevent="showThreadActionConfirmationModal = false" />
             </div>
             <div>
                 <x-forum::button
                     type="submit"
                     :label="trans('forum::general.proceed')"
-                    @click="commitAction" />
+                    @click="applyThreadAction" />
+            </div>
+        </div>
+    </x-forum::modal>
+
+    <x-forum::modal x-show="showPostsActionConfirmationModal" :heading="trans('forum::general.confirm_action')" onClose="showPostsActionConfirmationModal = false">
+        {{ trans('forum::general.generic_confirm') }}
+
+        <div class="flex mt-6">
+            <div class="grow">
+                <x-forum::link-button
+                    intent="secondary"
+                    :label="trans('forum::general.cancel')"
+                    @click.prevent="showPostsActionConfirmationModal = false" />
+            </div>
+            <div>
+                <x-forum::button
+                    type="submit"
+                    :label="trans('forum::general.proceed')"
+                    @click="applyPostsAction" />
             </div>
         </div>
     </x-forum::modal>
@@ -211,15 +262,19 @@
 <script>
 Alpine.data('thread', () => {
     return {
-        toggledAll: false,
+        toggledAllPosts: false,
         selectedPosts: [],
-        bulkAction: null,
-        showConfirmationModal: false,
-        confirmationModalText: '',
-        action: null,
+        postsAction: 'none',
+        permadeletePosts: false,
+        showPostsActionConfirmationModal: false,
+        threadAction: null,
+        showThreadActionConfirmationModal: false,
+        threadActionConfirmationText: '',
         reset() {
-            this.toggledAll = false;
+            this.toggledAllPosts = false;
             this.selectedPosts = [];
+            this.showThreadActionConfirmationModal = false;
+            this.showPostsActionConfirmationModal = false;
         },
         onPostChanged(event) {
             if (event.detail.isSelected) {
@@ -231,14 +286,14 @@ Alpine.data('thread', () => {
         onPageChanged() {
             this.reset();
         },
-        confirmAction(action, text) {
-            this.action = action;
-            this.confirmationModalText = text;
-            this.showConfirmationModal = true;
+        confirmThreadAction(action, text) {
+            this.threadAction = action;
+            this.threadActionConfirmationText = text;
+            this.showThreadActionConfirmationModal = true;
         },
-        async commitAction() {
+        async applyThreadAction() {
             let result;
-            switch (this.action) {
+            switch (this.threadAction) {
                 case 'delete':
                     result = await $wire.delete(false);
                     break;
@@ -269,7 +324,28 @@ Alpine.data('thread', () => {
             }
 
             if (result === null) return;
-            if (result.type == 'success') this.showConfirmationModal = false;
+            if (result.type == 'success') this.showThreadActionConfirmationModal = false;
+            $dispatch('alert', result);
+        },
+        confirmPostsAction() {
+            this.showPostsActionConfirmationModal = true;
+        },
+        async applyPostsAction() {
+            if (this.postsAction == null || this.selectedPosts.length == 0) {
+                return;
+            }
+
+            let result;
+            switch (this.postsAction) {
+                case 'delete':
+                    result = await $wire.deletePosts(this.selectedPosts, this.permadeletePosts);
+                    break;
+                case 'restore':
+                    result = await $wire.restorePosts(this.selectedPosts);
+                    break;
+            }
+
+            if (result.type == 'success') this.reset();
             $dispatch('alert', result);
         },
         async reply() {
@@ -279,10 +355,10 @@ Alpine.data('thread', () => {
             $dispatch('alert', result);
         },
         toggleAll() {
-            this.toggledAll = !this.toggledAll;
+            this.toggledAllPosts = !this.toggledAllPosts;
             const checkboxes = document.querySelectorAll('[data-post] input[type=checkbox]');
             checkboxes.forEach(checkbox => {
-                checkbox.checked = this.toggledAll;
+                checkbox.checked = this.toggledAllPosts;
                 checkbox.dispatchEvent(new Event('change'));
             });
         }

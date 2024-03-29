@@ -1,5 +1,5 @@
 <div id="post-{{ $post->sequence }}" class="post-card my-4" x-data="postCard" data-post="{{ $post->id }}" {{ $selectable ? 'x-on:change=onPostChanged' : '' }}>
-    <div class="bg-white shadow-md rounded-lg flex flex-col sm:flex-row items-stretch" {{ $post->trashed() ? 'opacity-75' : '' }}" :class="classes">
+    <div class="bg-white shadow-md rounded-lg flex flex-col sm:flex-row items-stretch {{ $post->trashed() ? 'opacity-75' : '' }}" :class="classes">
         @if ($showAuthorPane)
             <div class="flex max-w-full sm:max-w-40 lg:max-w-full lg:w-56 px-6 py-4 sm:py-6 border-b sm:border-b-0 sm:border-r border-slate-200">
                 <div class="grow text-lg font-medium truncate">
@@ -17,13 +17,31 @@
                 <livewire:forum::components.post.quote :post="$post->parent" />
             @endif
 
-            {!! Forum::render($post->content) !!}
+            @if ($post->trashed())
+                @can ('viewTrashedPosts')
+                    <div class="mb-4">
+                        {!! Forum::render($post->content) !!}
+                    </div>
+                @endcan
+
+                <div>
+                    <livewire:forum::components.pill
+                        bg-color="bg-zinc-400"
+                        text-color="text-zinc-950"
+                        margin="mr-2"
+                        icon="trash-mini"
+                        :text="trans('forum::general.deleted')" />
+                </div>
+            @else
+                {!! Forum::render($post->content) !!}
+            @endif
 
             <div class="flex mt-4">
                 <div class="grow text-slate-500">
                     <livewire:forum::components.timestamp :carbon="$post->created_at" />
                     @if ($post->hasBeenUpdated())
-                        ({{ trans('forum::general.last_updated') }} <livewire:forum::components.timestamp :carbon="$post->updated_at" />)
+                        <span class="mx-1 text-slate-500">•</span>
+                        {{ trans('forum::general.last_updated') }} <livewire:forum::components.timestamp :carbon="$post->updated_at" />
                     @endif
                 </div>
                 @if (!isset($single) || !$single)

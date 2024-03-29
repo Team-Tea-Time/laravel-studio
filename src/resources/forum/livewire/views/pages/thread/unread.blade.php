@@ -33,7 +33,7 @@
         onClose="showMarkAsReadModal = false">
         {{ trans('forum::general.generic_confirm') }}
 
-        <div class="flex mt-4">
+        <div class="flex mt-6">
             <div class="grow">
                 <x-forum::button
                     intent="secondary"

@@ -3,6 +3,7 @@
     <input
         type="{{ $type ?? 'text' }}"
         id="{{ $id }}"
+        value="{{ $value }}"
         class="w-full p-2.5 bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block"
         {{ $attributes }} />
 

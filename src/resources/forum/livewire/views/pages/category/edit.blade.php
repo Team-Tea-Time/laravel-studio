@@ -67,7 +67,7 @@
         onClose="showDeleteModal = false">
         {{ trans('forum::categories.confirm_nonempty_delete') }}
 
-        <div class="flex mt-4">
+        <div class="flex mt-6">
             <div class="grow">
                 <x-forum::button
                     intent="secondary"

@@ -114,7 +114,6 @@
         <x-forum::button
             :label="trans('forum::general.proceed')"
             @click="applySelectedAction"
-            :wire-confirm="trans('forum::general.generic_confirm')"
             x-bind:disabled="selectedAction == 'none' || selectedAction == 'move' && destinationCategory == 0" />
     </div>
 
