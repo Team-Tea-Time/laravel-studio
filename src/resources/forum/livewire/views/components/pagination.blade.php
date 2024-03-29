@@ -52,7 +52,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
                     </p>
                 </div>
 
-                <div>
+                <div class="text-center">
                     <span class="relative z-0 inline-flex rounded-md shadow-sm">
                         <span>
                             {{-- Previous Page Link --}}

@@ -18,16 +18,30 @@
     </head>
     <body class="forum bg-slate-200">
         <div class="bg-white shadow-md border-b border-slate-100">
-            <div class="container mx-auto p-4 flex flex-row">
-                <div class="text-xl mr-6 font-bold">
+            <div class="container flex flex-wrap items-center justify-between mx-auto p-4">
+                <a href="/" class="text-lg font-medium">
                     {{ config('app.name') }}
-                </div>
-                <div class="text-lg self-center">
-                    <a href="/" class="mx-2">Home</a>
-                    <a href="{{ route('forum.category.index') }}" class="mx-2">{{ trans('forum::general.home_title') }}</a>
-                    <a href="{{ route('forum.recent') }}" class="mx-2">{{ trans('forum::threads.recent') }}</a>
-                    <a href="{{ route('forum.unread') }}" class="mx-2">{{ trans('forum::threads.unread_updated') }}</a>
-                    <a href="{{ route('forum.category.order') }}" class="mx-2">{{ trans('forum::general.manage') }}</a>
+                </a>
+                <button data-toggle="navbar" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar" aria-expanded="false">
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+                    </svg>
+                </button>
+                <div class="hidden w-full md:block md:w-auto" id="navbar">
+                    <ul class="font-medium flex flex-col mt-4 md:mt-0 md:flex-row rtl:space-x-reverse">
+                        <li>
+                            <a href="{{ route('forum.category.index') }}" class="block hover:bg-slate-100 rounded-md px-4 py-2 md:hover:bg-transparent md:inline">{{ trans('forum::general.home_title') }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('forum.recent') }}" class="block hover:bg-slate-100 rounded-md px-4 py-2 md:hover:bg-transparent md:inline">{{ trans('forum::threads.recent') }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('forum.unread') }}" class="block hover:bg-slate-100 rounded-md px-4 py-2 md:hover:bg-transparent md:inline">{{ trans('forum::threads.unread_updated') }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ route('forum.category.order') }}" class="block hover:bg-slate-100 rounded-md px-4 py-2 md:hover:bg-transparent md:inline">{{ trans('forum::general.manage') }}</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -48,6 +62,13 @@
                         }, 1000);
                     }
                 })
+            });
+
+            const menuToggle = document.querySelector('[data-toggle]');
+            menuToggle.addEventListener('click', () => {
+                const id = menuToggle.dataset.toggle;
+                const target = document.getElementById(id);
+                target.classList.toggle('hidden');
             });
         </script>
     </body>

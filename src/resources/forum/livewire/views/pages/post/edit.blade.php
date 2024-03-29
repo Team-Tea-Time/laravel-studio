@@ -41,7 +41,7 @@
         onClose="showDeleteModal = false">
         {{ trans_choice('forum::posts.confirm_delete', 1) }}
 
-        <div class="flex mt-6">
+        <div class="flex flex-wrap mt-6">
             <div class="grow">
                 <x-forum::button
                     intent="secondary"

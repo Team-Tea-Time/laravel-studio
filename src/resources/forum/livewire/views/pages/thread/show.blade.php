@@ -46,7 +46,7 @@
 
     <div class="flex flex-col lg:flex-row items-center">
         <div class="grow">
-            <div class="inline-flex">
+            <div class="inline-flex flex-wrap sm:flex-nowrap">
                 @if (Gate::allows('deleteThreads', $thread->category) && Gate::allows('delete', $thread))
                     @if ($thread->trashed())
                         <x-forum::group-button
@@ -157,7 +157,7 @@
     {{ $posts->links('forum::components.pagination') }}
 
     @if (!$thread->trashed() && Gate::allows('reply', $thread))
-        <div id="quick-reply">
+        <div id="quick-reply" class="mt-4">
             <h2>{{ trans('forum::general.quick_reply') }}</h2>
 
             <div class="bg-white rounded-md shadow-md p-6 mt-4">
@@ -170,7 +170,7 @@
         </div>
     @endif
 
-    <div x-show="selectedPosts.length > 0" class="fixed bottom-0 right-0 z-40 min-w-96 bg-white shadow-md rounded-md m-4 p-6 z-30">
+    <div x-show="selectedPosts.length > 0" class="fixed bottom-0 right-0 z-40 left-0 sm:left-auto sm:min-w-96 bg-white shadow-md rounded-md m-4 p-6 z-30">
         <h3>{{ trans('forum::general.with_selection') }}</h3>
 
         <x-forum::form.input-select
@@ -222,7 +222,7 @@
             </x-forum::form.input-select>
         </div>
 
-        <div class="flex mt-6">
+        <div class="flex flex-wrap mt-6">
             <div class="grow">
                 <x-forum::link-button
                     intent="secondary"
@@ -241,7 +241,7 @@
     <x-forum::modal x-show="showPostsActionConfirmationModal" :heading="trans('forum::general.confirm_action')" onClose="showPostsActionConfirmationModal = false">
         {{ trans('forum::general.generic_confirm') }}
 
-        <div class="flex mt-6">
+        <div class="flex flex-wrap mt-6">
             <div class="grow">
                 <x-forum::link-button
                     intent="secondary"

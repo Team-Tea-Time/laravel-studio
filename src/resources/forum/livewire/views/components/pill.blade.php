@@ -1,6 +1,7 @@
 <span class="inline-block
     rounded-full
     text-base
+    text-nowrap
     align-middle
     {{ $bgColor ?? 'bg-zinc-300' }}
     {{ $textColor ?? 'text-zinc-600' }}

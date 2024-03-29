@@ -36,7 +36,7 @@
                 {!! Forum::render($post->content) !!}
             @endif
 
-            <div class="flex mt-4">
+            <div class="flex flex-col sm:flex-row mt-4">
                 <div class="grow text-slate-500">
                     <livewire:forum::components.timestamp :carbon="$post->created_at" />
                     @if ($post->hasBeenUpdated())
@@ -45,7 +45,7 @@
                     @endif
                 </div>
                 @if (!isset($single) || !$single)
-                    <div>
+                    <div class="text-right sm:text-left mt-2 sm:mt-0">
                         @if (!$post->trashed())
                             <a href="{{ Forum::route('post.show', $post) }}" class="font-medium">
                                 {{ trans('forum::general.permalink') }}

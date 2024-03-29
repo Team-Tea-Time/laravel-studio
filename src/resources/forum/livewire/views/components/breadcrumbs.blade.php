@@ -1,5 +1,5 @@
 <nav class="breadcrumbs bg-slate-300 rounded-lg p-2 my-2" aria-label="breadcrumb">
-    <ol class="flex">
+    <ol class="flex flex-wrap">
         <li>
             <a href="{{ url(config('forum.frontend.router.prefix')) }}" class="flex items-center">
                 <span class="inline-block mr-1">
