@@ -51,7 +51,7 @@
         @apply text-xl;
     }
 
-    a:not(.link-button) {
+    a:not(.link-button):not(.group-button) {
         @apply text-slate-600 hover:text-slate-900;
     }
 }

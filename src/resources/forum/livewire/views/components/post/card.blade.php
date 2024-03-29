@@ -1,9 +1,9 @@
 <div id="post-{{ $post->sequence }}" class="post-card my-4" x-data="postCard" data-post="{{ $post->id }}" {{ $selectable ? 'x-on:change=onPostChanged' : '' }}>
-    <div class="bg-white shadow-md rounded-lg flex items-stretch" {{ $post->trashed() ? 'opacity-75' : '' }}" :class="classes">
+    <div class="bg-white shadow-md rounded-lg flex flex-col sm:flex-row items-stretch" {{ $post->trashed() ? 'opacity-75' : '' }}" :class="classes">
         @if ($showAuthorPane)
-            <div class="flex flex-col min-w-48 p-6 border-r border-slate-200">
-                <div class="grow text-lg font-medium">
-                    {{ $post->authorName }}
+            <div class="flex max-w-full sm:max-w-40 lg:max-w-full lg:w-56 px-6 py-4 sm:py-6 border-b sm:border-b-0 sm:border-r border-slate-200">
+                <div class="grow text-lg font-medium truncate">
+                    {{ $post->authorName }} weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
                 </div>
                 <div>
                     @if (! isset($single) || ! $single)

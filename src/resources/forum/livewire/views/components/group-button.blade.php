@@ -4,14 +4,9 @@ $colorClasses = match ($intent) {
     'secondary' => 'text-zinc-800 bg-zinc-400/50 hover:bg-zinc-400/35',
     'danger' => 'text-white bg-red-500 hover:bg-red-400'
 };
-
-$sizeClasses = match ($size) {
-    'regular', '', null => 'min-w-36 px-4 py-2',
-    'small' => 'px-4 py-1',
-};
 @endphp
 
-<a href="{{ $href }}" class="link-button inline-block rounded-full font-medium text-lg text-center {{ $colorClasses }} {{ $sizeClasses }}" {{ $attributes }}>
+<a href="{{ $href }}" class="group-button py-2 px-5 text-base font-medium inline-flex items-center gap-x-2 -ms-px first:rounded-s-xl first:ms-0 last:rounded-e-xl focus:z-10 disabled:opacity-50 disabled:pointer-events-none {{ $colorClasses }}" {{ $attributes }}>
     @if (isset($icon) && !empty($icon))
         @include ("forum::components.icons.{$icon}", ['size' => '5'])
     @endif
