@@ -16,4 +16,9 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
+    })
+    ->booting(function (Application $app) {
+        if (!$app->runningInConsole()) {
+            putenv('XDEBUG_SESSION=laravel');
+        }
     })->create();
