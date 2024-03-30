@@ -6,7 +6,6 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/css/app.css',
-                'resources/forum/livewire/css/forum.css',
                 'resources/js/app.js',
             ],
             refresh: true,
