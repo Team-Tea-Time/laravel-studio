@@ -35,6 +35,14 @@
         @apply rounded-md border-green-500 outline outline-green-500;
     }
 
+    .bg-category {
+        background-color: var(--category-light);
+    }
+
+    .text-category {
+        color: var(--category-light);
+    }
+
     div, p {
         font-size: 1rem;
     }
@@ -51,7 +59,7 @@
         @apply text-xl;
     }
 
-    a:not(.link-button):not(.group-button) {
+    a:not(.link-button):not(.group-button):not(.text-category) {
         @apply text-slate-600 hover:text-slate-900;
     }
 
@@ -60,7 +68,15 @@
             @apply text-slate-400;
         }
 
-        a:not(.link-button):not(.group-button) {
+        .bg-category {
+            background-color: var(--category-dark);
+        }
+
+        .text-category {
+            color: var(--category-dark);
+        }
+
+        a:not(.link-button):not(.group-button):not(.text-category) {
             @apply text-slate-300 hover:text-white;
         }
     }

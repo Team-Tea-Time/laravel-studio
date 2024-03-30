@@ -2,7 +2,7 @@
     @include ('forum::components.loading-overlay')
     @include ('forum::components.breadcrumbs')
 
-    <h1 class="mb-0" style="color: {{ $thread->category->color }}">{{ $thread->title }}</h1>
+    <h1 class="mb-0">{{ $thread->title }}</h1>
 
     <div class="flex items-center mt-4 mb-6">
         <div class="grow">

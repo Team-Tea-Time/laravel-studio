@@ -1,8 +1,8 @@
-<div x-data="category" x-on:page-changed="onPageChanged">
+<div x-data="category" x-on:page-changed="onPageChanged" style="{{ $category->styleVariables }}">
     @include ('forum::components.loading-overlay')
     @include ('forum::components.breadcrumbs')
 
-    <h1 class="mb-0" style="color: {{ $category->color }}">{{ $category->title }}</h1>
+    <h1 class="mb-0 text-category">{{ $category->title }}</h1>
     <h2 class="mt-0 text-slate-500">{{ $category->description }}</h2>
 
     <div class="flex mt-6 mb-8">

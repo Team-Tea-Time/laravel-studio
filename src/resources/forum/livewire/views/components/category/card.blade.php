@@ -1,11 +1,11 @@
-<div class="my-4">
+<div class="my-4" style="{{ $category->styleVariables }}">
     <div class="bg-white shadow-md rounded-lg p-4 flex flex-col sm:flex-row sm:items-center sm:content-center dark:bg-slate-700">
         <div class="hidden sm:block self-stretch">
-            <div class="w-3 h-full rounded-full mr-4" style="background-color: {{ $category->color }}"></div>
+            <div class="w-3 h-full rounded-full mr-4 bg-category"></div>
         </div>
         <div class="grow text-center sm:text-left">
             <h2>
-                <a href="{{ $category->route }}" style="color: {{ $category->color }}">{{ $category->title }}</a>
+                <a href="{{ $category->route }}" class="text-category">{{ $category->title }}</a>
             </h2>
             <h3 class="text-slate-600 dark:text-slate-400">{{ $category->description }}</h3>
         </div>
@@ -49,14 +49,14 @@
 
     @if (count($category->children) > 0)
         @foreach ($category->children as $subcategory)
-            <div class="flex mt-4">
+            <div class="flex mt-4" style="{{ $subcategory->styleVariables }}">
                 <div class="min-w-12 sm:min-w-24 self-center text-center text-slate-300 dark:text-slate-700">
                     @include ('forum::components.icons.subcategory', ['size' => '12'])
                 </div>
                 <div class="grow flex flex-col sm:flex-row sm:items-center sm:content-center items-center justify-items-center bg-white shadow-md rounded-lg p-4 dark:bg-slate-700">
                     <div class="grow text-center sm:text-left">
                         <h3>
-                            <a href="{{ $subcategory->route }}" style="color: {{ $subcategory->color }}">{{ $subcategory->title }}</a>
+                            <a href="{{ $subcategory->route }}" class="text-category">{{ $subcategory->title }}</a>
                         </h3>
                         <h3 class="text-slate-600 text-base dark:text-slate-400">{{ $subcategory->description }}</h3>
                     </div>

@@ -1,4 +1,4 @@
-<div class="thread-card my-4" x-data="threadCard" data-thread="{{ $thread->id }}" {{ $selectable ? 'x-on:change=onThreadChanged' : '' }}>
+<div class="thread-card my-4" x-data="threadCard" data-thread="{{ $thread->id }}" {{ $selectable ? 'x-on:change=onThreadChanged' : '' }} style="{{ $thread->category->styleVariables }}">
     <div class="bg-white transition ease-in-out shadow-md rounded-lg p-4 flex flex-col sm:flex-row items-center justify-items-center dark:bg-slate-700 {{ $thread->trashed() ? 'opacity-75' : '' }}" :class="classes">
         <div class="grow text-center sm:text-left">
             <a href="{{ $thread->route }}" class="block text-xl mb-2">
@@ -34,12 +34,12 @@
                         icon="trash-mini"
                         :text="trans('forum::general.deleted')" />
                 @endif
-                <span class="inline-block align-middle" @if (!$showCategory) style="color: {{ $thread->category->color }}"@endif>
+                <span class="inline-block align-middle {{ !$showCategory ? 'text-category' : '' }}">
                     {{ $thread->title }}
                 </span>
             </a>
             @if ($showCategory)
-                <a href="{{ $thread->category->route }}" class="font-medium" style="color: {{ $thread->category->color }}">
+                <a href="{{ $thread->category->route }}" class="font-medium text-category">
                     {{ $thread->category->title }}
                 </a>
                 <span class="mx-1 text-slate-500">•</span>

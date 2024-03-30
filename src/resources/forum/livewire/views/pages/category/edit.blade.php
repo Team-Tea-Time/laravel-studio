@@ -21,8 +21,14 @@
 
                     <x-forum::form.input-text
                         id="color"
-                        :label="trans('forum::general.color')"
-                        wire:model="color"
+                        :label="trans('forum::general.color_light_mode')"
+                        wire:model="color_light_mode"
+                        data-coloris />
+
+                    <x-forum::form.input-text
+                        id="color"
+                        :label="trans('forum::general.color_dark_mode')"
+                        wire:model="color_dark_mode"
                         data-coloris />
 
                     @if ($categories->count() > 0)
