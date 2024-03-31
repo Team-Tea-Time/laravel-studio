@@ -7,5 +7,3 @@ window.dateFormatDistance = formatDistance;
 window.Coloris = Coloris;
 window.Coloris.init();
 window.NestedSort = NestedSort;
-
-console.log("BIGMAO");

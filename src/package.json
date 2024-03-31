@@ -9,7 +9,7 @@
         "@tailwindcss/forms": "^0.5.2",
         "alpinejs": "^3.4.2",
         "autoprefixer": "^10.4.2",
-        "axios": "^1.6.4",
+        "axios": "^1.6.8",
         "laravel-echo": "^1.16.0",
         "laravel-vite-plugin": "^1.0",
         "postcss": "^8.4.31",
@@ -19,7 +19,12 @@
     },
     "dependencies": {
         "@melloware/coloris": "^0.23.0",
+        "@simonwep/pickr": "^1.9.0",
         "date-fns": "^3.6.0",
-        "nested-sort": "^5.2.0"
+        "feather-icons": "^4.29.1",
+        "nested-sort": "^5.2.0",
+        "sortablejs": "^1.15.2",
+        "vue": "^3.4.21",
+        "vuedraggable": "^4.1.0"
     }
 }
