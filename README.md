@@ -24,3 +24,12 @@ docker-compose exec php-fpm php artisan migrate
 ```
 
 6) Open http://localhost:8000/
+
+### Broadcasting events
+
+To work with event broadcasting, make sure the queue worker and Reverb server are running:
+
+```bash
+php artisan queue:work
+php artisan reverb:start
+```
