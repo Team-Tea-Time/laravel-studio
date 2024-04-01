@@ -1,7 +1,7 @@
 <div id="post-{{ $post->sequence }}" class="post-card my-4" x-data="postCard" data-post="{{ $post->id }}" {{ $selectable ? 'x-on:change=onPostChanged' : '' }}>
     <div class="bg-white shadow-md rounded-lg flex flex-col sm:flex-row items-stretch dark:bg-slate-700 {{ $post->trashed() ? 'opacity-65' : '' }}" :class="classes">
         @if ($showAuthorPane)
-            <div class="flex flex-row sm:flex-col max-w-full sm:max-w-40 lg:max-w-full lg:w-56 px-6 py-4 sm:py-6 border-b sm:border-b-0 sm:border-r border-slate-200 dark:border-slate-600">
+            <div class="flex flex-row sm:flex-col w-full sm:w-1/5 px-6 py-4 sm:py-6 border-b sm:border-b-0 sm:border-r border-slate-200 dark:border-slate-600">
                 <div class="grow text-lg font-medium truncate">
                     {{ $post->authorName }}
                 </div>
@@ -12,7 +12,7 @@
                 </div>
             </div>
         @endif
-        <div class="grow p-6">
+        <div class="grow p-6 w-full sm:w-4/5">
             @if (isset($post->parent))
                 <livewire:forum::components.post.quote :post="$post->parent" />
             @endif
