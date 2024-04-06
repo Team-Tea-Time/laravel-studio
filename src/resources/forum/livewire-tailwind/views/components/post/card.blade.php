@@ -52,13 +52,6 @@
                             <a href="{{ Forum::route('post.show', $post) }}" class="font-medium">
                                 {{ trans('forum::general.permalink') }}
                             </a>
-                            @if ($post->sequence != 1)
-                                @can ('deletePosts', $post->thread)
-                                    @can ('delete', $post)
-
-                                    @endcan
-                                @endcan
-                            @endif
                             @can ('edit', $post)
                                 <a href="{{ Forum::route('post.edit', $post) }}" class="font-medium ml-2">
                                     {{ trans('forum::general.edit') }}
@@ -69,24 +62,14 @@
                                     {{ trans('forum::general.reply') }}
                                 </a>
                             @endcan
-                        @else
-                            @can ('restorePosts', $post->thread)
-                                @can ('restore', $post)
-
-                                @endcan
-                            @endcan
                         @endif
                         @if ($selectable)
-                            @can ('deletePosts', $post->thread)
-                                @can ('delete', $post)
-                                    <div class="inline-block ml-4">
-                                        <x-forum::form.input-checkbox
-                                            id=""
-                                            :value="$post->id"
-                                            @change="onChanged" />
-                                    </div>
-                                @endcan
-                            @endcan
+                            <div class="inline-block ml-4">
+                                <x-forum::form.input-checkbox
+                                    id=""
+                                    :value="$post->id"
+                                    @change="onChanged" />
+                            </div>
                         @endif
                     </div>
                 @endif
