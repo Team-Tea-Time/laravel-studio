@@ -6,7 +6,7 @@
         <div class="grow max-w-screen-lg">
             <h1>{{ trans('forum::threads.new_thread') }} ({{ $category->title }})</h1>
 
-            <div class="bg-white rounded-md shadow-md my-2 p-6">
+            <div class="bg-white rounded-md shadow-md my-2 p-6 dark:bg-slate-700">
                 <form wire:submit="create">
                     <x-forum::form.input-text
                         id="title"
