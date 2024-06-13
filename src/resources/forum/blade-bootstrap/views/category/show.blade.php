@@ -21,9 +21,11 @@
 
             <div class="btn-group" role="group">
                 @can ('editCategories')
-                    <button type="button" class="btn btn-secondary" data-open-modal="edit-category">
-                        {{ trans('forum::general.edit') }}
-                    </button>
+                    @can ('edit', $category)
+                        <button type="button" class="btn btn-secondary" data-open-modal="edit-category">
+                            {{ trans('forum::general.edit') }}
+                        </button>
+                    @endcan
                 @endcan
             </div>
         </div>
@@ -163,10 +165,14 @@
     @endif
 
     @can ('editCategories')
-        @include ('forum::category.modals.edit')
+        @can ('edit', $category)
+            @include ('forum::category.modals.edit')
+        @endcan
     @endcan
     @can ('deleteCategories')
-        @include ('forum::category.modals.delete')
+        @can ('delete', $category)
+            @include ('forum::category.modals.delete')
+        @endcan
     @endcan
 
     <style>
