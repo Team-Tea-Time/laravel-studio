@@ -1,6 +1,6 @@
 <div @if (!$post->trashed())id="post-{{ $post->sequence }}"@endif
     class="post card mb-2 {{ $post->trashed() || $thread->trashed() ? 'deleted' : '' }}"
-    :class="{ 'border-primary': selectedPosts.includes({{ $post->id }}) }">
+    :class="{ 'border-primary': state.selectedPosts.includes({{ $post->id }}) }">
     <div class="card-header">
         @if (!isset($single) || !$single)
             <span class="float-end">
@@ -8,7 +8,7 @@
                 @if ($post->sequence != 1)
                     @can ('deletePosts', $post->thread)
                         @can ('delete', $post)
-                            <input type="checkbox" name="posts[]" :value="{{ $post->id }}" v-model="selectedPosts">
+                            <input type="checkbox" name="posts[]" :value="{{ $post->id }}" v-model="state.selectedPosts">
                         @endcan
                     @endcan
                 @endif

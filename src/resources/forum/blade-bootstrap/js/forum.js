@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 isUserDropdownCollapsed,
             };
         }
-    }).mount('#navbar');
+    }).mount('.v-navbar');
 
     const mask = document.querySelector('.mask');
 

@@ -114,7 +114,7 @@
                     <label for="selectAllPosts">
                         {{ trans('forum::posts.select_all') }}
                     </label>
-                    <input type="checkbox" value="" id="selectAllPosts" class="align-middle" @click="toggleAll" :checked="selectedPosts.length == posts.data.length">
+                    <input type="checkbox" value="" id="selectAllPosts" class="align-middle" @click="toggleAll" :checked="state.selectedPosts.length == posts.data.length">
                 </div>
             </div>
         @endif
@@ -126,7 +126,7 @@
         @if ((count($posts) > 1 || $posts->currentPage() > 1) && (Gate::allows('deletePosts', $thread) || Gate::allows('restorePosts', $thread)) && count($selectablePosts) > 0)
                 <div class="fixed-bottom-right pb-xs-0 pr-xs-0 pb-sm-3 pr-sm-3">
                     <transition name="fade">
-                        <div class="card text-white bg-secondary shadow-sm" v-if="selectedPosts.length">
+                        <div class="card text-white bg-secondary shadow-sm" v-if="state.selectedPosts.length">
                             <div class="card-header text-center">
                                 {{ trans('forum::general.with_selection') }}
                             </div>
@@ -331,7 +331,7 @@
                         <label class="input-group-text" for="category-id">{{ trans_choice('forum::categories.category', 1) }}</label>
                     </div>
                     <select name="category_id" id="category-id" class="form-select">
-                        @include ('forum::category.partials.options', ['categories' => $threadDestinationCategories, 'hide' => $thread->category])
+                        @include ('forum::category.partials.options', ['hide' => $thread->category])
                     </select>
                 </div>
 
