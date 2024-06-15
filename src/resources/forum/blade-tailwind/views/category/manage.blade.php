@@ -33,9 +33,11 @@
         <draggable
             :list="categories"
             tag="ul"
+            class="cursor-move"
             @start="drag=true"
             @end="drag=false"
             :group="{ name: 'categories' }"
+            :empty-insert-threshold="50"
             item-key="id">
             <template #item="{element}">
                 <li class="bg-white p-4 my-2 rounded-md border" :data-id="element.id">
@@ -50,7 +52,10 @@
                         </span>
                     </span>
 
-                    <draggable-category-list :categories="element.children" />
+                    <span v-if="element.children.length == 0" class="block min-h-5 border border-dashed border-slate-400 rounded">
+                        <draggable-category-list :categories="element.children" />
+                    </span>
+                    <draggable-category-list v-else :categories="element.children" />
                 </li>
             </template>
         </draggable>

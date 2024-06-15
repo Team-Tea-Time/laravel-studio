@@ -37,6 +37,7 @@
             @start="drag=true"
             @end="drag=false"
             :group="{ name: 'categories' }"
+            :empty-insert-threshold="50"
             item-key="id">
             <template #item="{element}">
                 <li class="list-group-item" :data-id="element.id">

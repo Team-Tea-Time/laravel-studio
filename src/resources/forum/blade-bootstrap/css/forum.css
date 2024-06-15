@@ -41,8 +41,12 @@ a
 
 .list-group .list-group
 {
-    min-height: 1em;
-    margin-top: 1em;
+    min-height: 2em;
+    margin: .5em 0;
+}
+
+.list-group:empty {
+    border: 1px dashed var(--bs-gray);
 }
 
 .btn svg.feather
