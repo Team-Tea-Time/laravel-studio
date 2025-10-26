@@ -83,9 +83,9 @@
         <hr>
 
         @if ((count($posts) > 1 || $posts->currentPage() > 1) && (Gate::allows('deletePosts', $thread) || Gate::allows('restorePosts', $thread)) && count($selectablePosts) > 0)
-            <form :action="postActions[selectedPostAction]" method="POST">
+            <form :action="postActions[state.selectedPostAction]" method="POST">
                 @csrf
-                <input type="hidden" name="_method" :value="postActionMethods[selectedPostAction]" />
+                <input type="hidden" name="_method" :value="postActionMethods[state.selectedPostAction]" />
         @endif
 
         <div class="row mb-3">
@@ -135,14 +135,14 @@
                                     <div class="input-group-prepend">
                                         <label class="input-group-text" for="bulk-actions">{{ trans_choice('forum::general.actions', 1) }}</label>
                                     </div>
-                                    <select class="custom-select" id="bulk-actions" v-model="selectedPostAction">
+                                    <select class="custom-select" id="bulk-actions" v-model="state.selectedPostAction">
                                         <option value="delete">{{ trans('forum::general.delete') }}</option>
                                         <option value="restore">{{ trans('forum::general.restore') }}</option>
                                     </select>
                                 </div>
 
                                 @if (config('forum.general.soft_deletes'))
-                                    <div class="form-check mb-3" v-if="selectedPostAction == 'delete'">
+                                    <div class="form-check mb-3" v-if="state.selectedPostAction == 'delete'">
                                         <input class="form-check-input" type="checkbox" name="permadelete" value="1" id="permadelete">
                                         <label class="form-check-label" for="permadelete">
                                             {{ trans('forum::general.perma_delete') }}

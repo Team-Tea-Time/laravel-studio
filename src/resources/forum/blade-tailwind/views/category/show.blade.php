@@ -21,9 +21,11 @@
 
             <x-forum::button-group>
                 @can ('editCategories')
-                    <x-forum::button-secondary type="button" data-open-modal="edit-category">
-                        {{ trans('forum::general.edit') }}
-                    </x-forum::button-secondary>
+                    @can ('edit', $category)
+                        <x-forum::button-secondary type="button" data-open-modal="edit-category">
+                            {{ trans('forum::general.edit') }}
+                        </x-forum::button-secondary>
+                    @endcan
                 @endcan
             </x-forum::button-group>
         </div>
@@ -77,6 +79,10 @@
                                             </div>
 
                                             <x-forum::select id="bulk-actions" v-model="state.selectedAction">
+                                                @if (Gate::allows('approveThreads') && Gate::allows('approveThreads', $category))
+                                                    <option value="approve">{{ trans('forum::general.approve') }}</option>
+                                                    <option value="unapprove">{{ trans('forum::general.unapprove') }}</option>
+                                                @endif
                                                 @can ('deleteThreads', $category)
                                                     <option value="delete">{{ trans('forum::general.delete') }}</option>
                                                 @endcan
@@ -167,10 +173,14 @@
     @endif
 
     @can ('editCategories')
-        @include ('forum::category.modals.edit')
+        @can ('edit', $category)
+            @include ('forum::category.modals.edit')
+        @endcan
     @endcan
     @can ('deleteCategories')
-        @include ('forum::category.modals.delete')
+        @can ('delete', $category)
+            @include ('forum::category.modals.delete')
+        @endcan
     @endcan
 
     <script type="module">
@@ -179,6 +189,8 @@
             const selectableThreadIds = @json($selectableThreadIds);
 
             const actions = {
+                approve: "{{ Forum::route('bulk.thread.approve') }}",
+                unapprove: "{{ Forum::route('bulk.thread.unapprove') }}",
                 delete: "{{ Forum::route('bulk.thread.delete') }}",
                 restore: "{{ Forum::route('bulk.thread.restore') }}",
                 lock: "{{ Forum::route('bulk.thread.lock') }}",
@@ -189,6 +201,8 @@
             };
 
             const actionMethods = {
+                approve: 'POST',
+                unapprove: 'POST',
                 delete: 'DELETE',
                 restore: 'POST',
                 lock: 'POST',
