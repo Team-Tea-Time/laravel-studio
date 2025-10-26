@@ -3,7 +3,7 @@ version: '3.7'
 services:
 
   mysql:
-    image: mysql:5.7
+    image: docker.io/mysql:5.7
     container_name: laravel-studio-mysql
     environment:
       - MYSQL_ROOT_PASSWORD=secret
@@ -14,7 +14,7 @@ services:
       - "3306:3306"
 
   nginx:
-    image: nginx:alpine
+    image: docker.io/nginx:alpine
     container_name: laravel-studio-nginx
     working_dir: /var/www/laravel-studio
     volumes:
