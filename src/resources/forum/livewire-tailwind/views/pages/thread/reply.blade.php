@@ -16,7 +16,7 @@
                 <form wire:submit="reply">
                     <x-forum::form.input-textarea
                         id="content"
-                        wire:model="content" />
+                        wire:model="form.content" />
 
                     <div class="flex mt-6">
                         <div class="grow">

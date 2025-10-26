@@ -7,18 +7,18 @@
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
-        "alpinejs": "^3.4.2",
+        "alpinejs": "^3.15.0",
         "autoprefixer": "^10.4.2",
         "axios": "^1.6.8",
-        "laravel-echo": "^1.16.0",
-        "laravel-vite-plugin": "^1.0",
+        "laravel-echo": "^1.19.0",
+        "laravel-vite-plugin": "^2.0",
         "postcss": "^8.4.31",
         "pusher-js": "^8.4.0-rc2",
-        "tailwindcss": "^3.4.1",
+        "tailwindcss": "^3.4.18",
         "vite": "^7.1.12"
     },
     "dependencies": {
-        "@melloware/coloris": "^0.23.0",
+        "@melloware/coloris": "^0.23.1",
         "@simonwep/pickr": "^1.9.1",
         "bootstrap": "^5.3.3",
         "date-fns": "^3.6.0",
