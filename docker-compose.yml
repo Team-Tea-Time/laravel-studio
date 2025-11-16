@@ -1,10 +1,10 @@
 version: '3.7'
 
 services:
-
   mysql:
     image: docker.io/mysql:5.7
     container_name: laravel-studio-mysql
+    hostname: mysql
     environment:
       - MYSQL_ROOT_PASSWORD=secret
       - MYSQL_DATABASE=studio
@@ -16,6 +16,7 @@ services:
   nginx:
     image: docker.io/nginx:alpine
     container_name: laravel-studio-nginx
+    hostname: nginx
     working_dir: /var/www/laravel-studio
     volumes:
       - ./src:/var/www/laravel-studio
@@ -28,6 +29,7 @@ services:
       context: .
       dockerfile: docker/php-fpm/Dockerfile
     container_name: laravel-studio-php-fpm
+    hostname: php-fpm
     working_dir: /var/www/laravel-studio
     volumes:
       - ./src:/var/www/laravel-studio
