@@ -37,8 +37,8 @@ return [
     |--------------------------------------------------------------------------
     |
     | Enable this if you want to display placeholder messages for soft-deleted
-    | posts instead of hiding them altogether. Enabling this will override the
-    | viewTrashedPosts ability.
+    | posts instead of hiding them altogether. Users with the viewTrashedPosts
+    | ability will always see deleted post content if this is enabled.
     |
     */
 
