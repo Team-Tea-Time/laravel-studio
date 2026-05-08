@@ -1,0 +1,26 @@
+<?php
+
+return [
+
+    'access_controlled_by_private_ancestor' => 'The ancestor category :category is set as private and controls access to this category.',
+    'actions' => 'Категория действия',
+    'category' => 'Категория',
+    'confirm_nonempty_delete' => 'Yes, I want to permanently delete this category and everything inside it',
+    'create' => 'Создать категорию',
+    'created' => 'Категория создана',
+    'deleted' => 'Категория удалена|Категории удалены',
+    'disable_threads' => 'Отключить темы',
+    'edit' => 'Edit category',
+    'enable_post_approval' => 'Enable post approval',
+    'enable_thread_approval' => 'Enable thread approval',
+    'enable_threads' => 'Включить темы',
+    'make_private' => 'Сделать приватным',
+    'mark_read' => 'Отметить как прочитанные',
+    'marked_read' => 'Новые / Обновленные темы в :category отмечены как прочитанные',
+    'parent' => 'Parent category',
+    'restored' => 'Категория восстановлена|Категории восстановлены',
+    'subcategories' => 'Подкатегории',
+    'threads_disabled' => 'Создание Новых тем отключено в этой категории',
+    'updated' => 'Категория обновлена|Категории обновлены',
+
+];

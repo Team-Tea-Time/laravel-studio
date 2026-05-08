@@ -1,0 +1,26 @@
+<?php
+
+return [
+
+    'access_controlled_by_private_ancestor' => 'The ancestor category :category is set as private and controls access to this category.',
+    'actions' => 'Kategori ayarları',
+    'category' => 'Kategori|Kategoriler',
+    'confirm_nonempty_delete' => 'Yes, I want to permanently delete this category and everything inside it',
+    'create' => 'Kategori Oluştur',
+    'created' => 'Kategori oluşturuldu',
+    'deleted' => 'Kategori silindi|Kategoriler Silindi',
+    'disable_threads' => 'Konuları kapat',
+    'edit' => 'Edit category',
+    'enable_post_approval' => 'Enable post approval',
+    'enable_thread_approval' => 'Enable thread approval',
+    'enable_threads' => 'Konuları aktif et',
+    'make_private' => 'Özel olarak işaretle',
+    'mark_read' => 'Bu kategorideki konuları okundu olarak işaretle',
+    'marked_read' => 'Yeni/Güncellenen şu :category deki konuları okundu olarak işaretlendi',
+    'parent' => 'Parent category',
+    'restored' => 'Kategori geri alındı|Kategoriler geri alındı',
+    'subcategories' => 'Alt Kategoriler',
+    'threads_disabled' => 'Bu kategori kilitli olduğundan buraya konu açamazsınız.',
+    'updated' => 'Kategori güncellendi|Kategoriler güncelendi',
+
+];

@@ -1,0 +1,32 @@
+{
+    "$schema": "https://www.schemastore.org/package.json",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite"
+    },
+    "dependencies": {
+        "@melloware/coloris": "^0.25.0",
+        "@simonwep/pickr": "^1.9.1",
+        "@tailwindcss/vite": "^4.1.11",
+        "alpinejs": "^3.15.12",
+        "autoprefixer": "^10.4.20",
+        "axios": "^1.16.0",
+        "concurrently": "^9.0.1",
+        "date-fns": "^4.1.0",
+        "feather-icons": "^4.29.2",
+        "laravel-echo": "^2.3.4",
+        "laravel-vite-plugin": "^3.1",
+        "nested-sort": "^5.2.0",
+        "tailwindcss": "^4.2.4",
+        "vite": "^8.0.0",
+        "vue": "^3.5.34",
+        "vuedraggable": "^4.1.0"
+    },
+    "optionalDependencies": {
+        "@rollup/rollup-linux-x64-gnu": "4.9.5",
+        "@tailwindcss/oxide-linux-x64-gnu": "^4.0.1",
+        "lightningcss-linux-x64-gnu": "^1.29.1"
+    }
+}
