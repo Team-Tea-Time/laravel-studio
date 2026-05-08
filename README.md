@@ -2,34 +2,6 @@
 
 Just Laravel boilerplate with some alterations to support local package development.
 
-## Usage
+This previously used Docker, but as of Laravel 13, the Docker files have been removed in favour of using the basic dev server built into Laravel.
 
-1) Clone:
-```
-git clone git@github.com:Team-Tea-Time/laravel-studio.git
-```
-
-2) Clone/place your package(s) into a `laravel-packages` directory adjacent to (not inside) this repo
-
-3) Copy `src/.env.example` to `src/.env`
-
-4) Modify the `autoload` section of `src/composer.json` to specify your package namespace(s)/path(s)
-
-5) Run `docker-compose up` and any other commands you may need to run in the container for your package(s):
-```bash
-docker-compose up
-docker-compose exec php-fpm composer install
-docker-compose exec php-fpm php artisan key:generate
-docker-compose exec php-fpm php artisan migrate
-```
-
-6) Open http://localhost:8000/
-
-### Broadcasting events
-
-To work with event broadcasting, make sure the queue worker and Reverb server are running:
-
-```bash
-php artisan queue:work
-php artisan reverb:start
-```
+In the unlikely event that anyone uses this and would like to use it with Docker, PRs are welcome!
