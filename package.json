@@ -13,7 +13,7 @@
         "alpinejs": "^3.15.12",
         "autoprefixer": "^10.4.20",
         "axios": "^1.16.0",
-        "concurrently": "^9.0.1",
+        "concurrently": "^9.2.4",
         "date-fns": "^4.1.0",
         "feather-icons": "^4.29.2",
         "laravel-echo": "^2.3.4",
